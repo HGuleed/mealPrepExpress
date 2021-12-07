@@ -1,0 +1,9 @@
+* {
+  margin: 0px;
+}
+
+.button.is-success.is-outlined:focus, .button.is-success.is-outlined:hover {
+  background-color: transparent;
+  border-color: #48c78e;
+  color: #48c78e
+} 
