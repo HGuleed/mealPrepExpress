@@ -7,30 +7,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@400;700&family=Staatliches&display=swap">
+  <script src="https://kit.fontawesome.com/3a4289a5d2.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./assets/css/ingr-style.css" />
   <title>Ingredients</title>
 </head>
 
 <body>
-  <header class="box hero">
-    <div class="hero-body container has-background-info-light">
-      <p id="ingredients-title" class="title is-1">
-        Ingredients
-      </p>
-      <button id="search-btn" class="button is-info">Search</button>
+  <header class="box p-0">
+    <div class="hero">
+      <div class="card hero-body container my-6 p-5">
+        <p id="ingredients-title" class="title is-2 mx-2">
+          Meal Express
+        </p>
+        <div class="content mx-2">
+          <p>
+            Select common ingredients <br> and build your meal plan!
+          </p>
+        </div>
+        <button id="search-btn" class="button is-success is-size-4 py-0"><i
+            class="fas fa-search pr-3"></i>Search</button>
+      </div>
     </div>
   </header>
   <section class="container">
-    <div class="columns container">
+    <div class="columns">
       <div class="column">
         <div class="card">
-          <div class="buttons">
-            <header class="card-header">
-              <p class="card-header-title">
-                Meat
-              </p>
-            </header> 
-            <div class="card-content">
+          <header class="card-header ml-3 mb-0 title is-4 color-3">
+            <figure class="image is-64x64 m-2">
+              <img class="is-rounded" src="./assets/images/meat-img.png">
+            </figure>
+            <p class="card-header-title">
+              Meat
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="buttons is-centered">
               <button class="ingrBtn button is-success is-outlined">Chicken</button>
               <button class="ingrBtn button is-success is-outlined">Ground Beef</button>
               <button class="ingrBtn button is-success is-outlined">Bacon</button>
@@ -55,13 +71,16 @@
       </div>
       <div class="column">
         <div class="card">
-          <div class="buttons">
-            <header class="card-header">
-              <p class="card-header-title">
-                Grains
-              </p>
-            </header>
-            <div class="card-content">
+          <header class="card-header ml-3 mb-0 title is-4 color-3">
+            <figure class="image is-64x64 m-2">
+              <img class="is-rounded" src="./assets/images/grains-img.png">
+            </figure>
+            <p class="card-header-title">
+              Grains
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="buttons is-centered">
               <button class="ingrBtn button is-success is-outlined">Bread</button>
               <button class="ingrBtn button is-success is-outlined">Whole Wheat Bread</button>
               <button class="ingrBtn button is-success is-outlined">White Bread</button>
@@ -77,15 +96,18 @@
           </div>
         </div>
       </div>
-      <div class="column">
-        <div class="card">
-          <div class="buttons">
-            <header class="card-header">
-              <p class="card-header-title">
-                Vegetables
-              </p>
-            </header>
-            <div class="card-content">
+      <div class="column color-test">
+        <div class="card ">
+          <header class="card-header ml-3 mb-0 title is-4 color-3">
+            <figure class="image is-64x64 m-2">
+              <img class="is-rounded" src="./assets/images/vegetables-img.png">
+            </figure>
+            <p class="card-header-title">
+              Vegetables
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="buttons is-centered">
               <button class="ingrBtn button is-success is-outlined">Onion</button>
               <button class="ingrBtn button is-success is-outlined">Broccoli</button>
               <button class="ingrBtn button is-success is-outlined">Spinach</button>
@@ -111,13 +133,16 @@
     <div class="columns container">
       <div class="column">
         <div class="card">
-          <div class="buttons">
-            <header class="card-header">
-              <p class="card-header-title">
-                Fruit
-              </p>
-            </header>
-            <div class="card-content">
+          <header class="card-header ml-3 mb-0 title is-4 color-3">
+            <figure class="image is-64x64 m-2">
+              <img class="is-rounded" src="./assets/images/fruit-img.png">
+            </figure>
+            <p class="card-header-title">
+              Fruit
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="buttons is-centered">
               <button class="ingrBtn button is-success is-outlined">Apple</button>
               <button class="ingrBtn button is-success is-outlined">Avacado</button>
               <button class="ingrBtn button is-success is-outlined">Banana</button>
@@ -140,13 +165,16 @@
       </div>
       <div class="column">
         <div class="card">
-          <div class="buttons">
-            <header class="card-header">
-              <p class="card-header-title">
-                Dairy
-              </p>
-            </header>
-            <div class="card-content">
+          <header class="card-header ml-3 mb-0 title is-4 color-3">
+            <figure class="image is-64x64 m-2">
+              <img class="is-rounded" src="./assets/images/dairy-img.png">
+            </figure>
+            <p class="card-header-title">
+              Dairy
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="buttons is-centered">
               <button class="ingrBtn button is-success is-outlined">Milk</button>
               <button class="ingrBtn button is-success is-outlined">Butter</button>
               <button class="ingrBtn button is-success is-outlined">Egg</button>
@@ -165,13 +193,17 @@
       </div>
       <div class="column">
         <div class="card">
-          <div class="buttons ">
-            <header class="card-header">
-              <p class="card-header-title">
-                Condiments & Dressings
-              </p>
-            </header>
-            <div class="card-content">
+
+          <header class="card-header ml-3 mb-0 title is-4 color-3">
+            <figure class="image is-64x64 m-2">
+              <img class="is-rounded" src="./assets/images/condiments-img.png">
+            </figure>
+            <p class="card-header-title title-is-4">
+              Condiments
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="buttons is-centered">
               <button class="ingrBtn button is-success is-outlined">Ketchup</button>
               <button class="ingrBtn button is-success is-outlined">Mustard</button>
               <button class="ingrBtn button is-success is-outlined">Mayonnaise</button>

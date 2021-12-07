@@ -2,8 +2,40 @@
   margin: 0px;
 }
 
+body {
+  background-color: #F2FBF7;
+}
+
+.hero {
+  background-image: url("../images/banner-2.png");
+  background-position: bottom left;
+  background-repeat: no-repeat;
+}
+
+#ingredients-title {
+  font-family: 'Kaushan Script', cursive;
+}
+
+#search-btn {
+  width: 100%;
+}
+
 .button.is-success.is-outlined:focus, .button.is-success.is-outlined:hover {
   background-color: transparent;
   border-color: #48c78e;
   color: #48c78e
 } 
+
+@media screen and (min-width: 1100px) {
+
+  .hero {
+    background-image: url("../images/banner-1.png");
+    background-position: bottom left;
+    background-repeat: no-repeat;
+  }
+
+  .hero-body {
+    margin-left: 55%;
+  }
+
+}
