@@ -11,6 +11,7 @@ body {
   background-color: var(--secondary-color);
 }
 
+/* HERO/HEADER STYLING -------------------------------------- */
 .hero {
   background-image: url("../images/banner-2.png");
   background-position: bottom left;
@@ -30,23 +31,9 @@ body {
   color: var(--primary-color)
 }
 
+/* INGREDIENTS PAGE STYLING ------------------------- */
 #ingredients-title {
   font-family: 'Kaushan Script', cursive;
-}
-
-.media-content span {
-  font-family: 'Kaushan Script', cursive;
-}
-
-#start-btn {
-  padding: 0;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-
-}
-
-.search, #meal-btn {
-  width: 100%;
 }
 
 .ingrBtn.button.is-success.is-outlined:focus {
@@ -55,10 +42,27 @@ body {
   color: var(--primary-color)
 }
 
+.search-btn-bottom button {
+  width: 100%;
+}
+
+/* UTILITIES STYLING */
 .hide {
   display: none;
 }
 
+/* WELCOME MODAL STYLING ---------------------------- */
+.media-content span {
+  font-family: 'Kaushan Script', cursive;
+}
+
+#start-btn {
+  padding: 0;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+/* RESPONSIVENESS STYLING START --------------------- */
 @media screen and (max-width: 768px) {
   .hide {
     display: block;
