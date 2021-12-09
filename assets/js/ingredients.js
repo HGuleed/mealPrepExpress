@@ -1,7 +1,11 @@
-var ingredientList = []; // fills with selected ingredient and becomes ingrListStr
+var ingredientList = []; // fills with selected ingredient
 var nmbOfMeals = 0;
 
-// alters state of the search button
+// Welcome page clock 
+var clock = document.getElementById("current-day")
+clock.textContent = moment().format("h:mm A - D MMM YYYY")
+
+// alters state of the search button -------------------------------------------------------
 var searchBtnState = function () {
   console.log(ingredientList)
   console.log(nmbOfMeals)
@@ -18,7 +22,7 @@ var searchBtnState = function () {
   }
 };
 
-// converts ingredientList array to text for API call
+// converts ingredientList array to text in ingrListStr for API call -----------------------
 var listToString = function (ingredientList) {
   var ingrListStr = ingredientList.toString();
   console.log(ingrListStr);
@@ -26,7 +30,7 @@ var listToString = function (ingredientList) {
 };
 
 // **ADD YOUR API KEY**
-// Search by ingredient call ------------------------------------------------------
+// Search by ingredient call --------------------------------------------------------------
 var getFoodApi = function (ingrListStr) {                                                                                                                                                                        // --------- // 
   foodTest = "https://api.spoonacular.com/recipes/complexSearch?query=all&addRecipeInformation=true&instructionsRequired=true&includeIngredients=" + ingrListStr + "&number=" + nmbOfMeals + "&fillIngredients=true&sort=max-used-ingredients&apiKey=74930b30746b4ed6824607ad1b62352a";
   console.log(ingrListStr);                                                                                                                                                                                      // --------- // 
@@ -47,7 +51,7 @@ var getFoodApi = function (ingrListStr) {                                       
   });
 };
 
-// Gather necessary data from API call --------------------------------------------
+// Gather necessary data from API call ----------------------------------------------------
 var parseRecipeData = function (recipe) {
   for (var i = 0; i < recipe.results.length; i++) {
     console.log("Recipe Title: "+recipe.results[i].title);
@@ -76,9 +80,10 @@ var parseRecipeData = function (recipe) {
   }
 };
 
-// ingredient btn listner ---------------------------------------------------------
+// ingredient btn listner ------------------------------------------------------------------
 $('.ingrBtn').on('click', function () {
   var btnState = $(this).attr('class');
+  // clicked btn text, minus spaces, to lower case. 
   var ingredient = $(this).text().replaceAll(" ", "").toLowerCase();
 
   // when button is first clicked, add ingr, turn solid clr
@@ -146,3 +151,4 @@ $('#welcome-tab').on('click', function () {
   $('#welcome-tab').addClass("is-active");
   $('#ingredient-tab').removeClass("is-active");
 });
+
