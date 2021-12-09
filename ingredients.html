@@ -17,22 +17,104 @@
 </head>
 
 <body>
+  <!-- WELCOME MODAL -->
+  <div id="welcome-modal" class="modal is-active">
+    <div id="modal-background" class="modal-background"></div>
+    <div class="modal-content">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="./assets/images/welcome-background.jpg" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+                <button id="start-btn" class='button is-success is-outlined is-rounded is-large'>Start</button>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">Welcome to <span>Meal Express</span>
+              </p>
+              <p class="subtitle is-6">Plan, pick, create!</p>
+            </div>
+          </div>
+          <div class="content">
+            Build a meal plan for the work week with the items you have in your kitchen.
+            <a href="#">@portfolio1</a>
+            <a href="#">@portfolio2</a>
+            <a href="#">@portfolio3</a>
+            <br>
+            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+  </div>
+  <!-- NUMBER OF MEALS MODAL -->
+  <div id="meal-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="card">
+        <header class="card-header ml-3 mb-0 title is-4 color-3">
+          <figure class="image is-64x64 m-2">
+            <img class="is-rounded" src="./assets/images/meat-img.png">
+          </figure>
+          <p class="card-header-title">
+            How man meals are we planning for this week?
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="buttons is-centered">
+            <button class="mealbtn button is-success is-outlined">1 Meal</button>
+            <button class="mealbtn button is-success is-outlined">2 Meals</button>
+            <button class="mealbtn button is-success is-outlined">3 Meals</button>
+            <button class="mealbtn button is-success is-outlined">4 Meals</button>
+            <button class="mealbtn button is-success is-outlined">5 Meals</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+  <!-- HEADER CARD-->
   <header class="box p-0">
     <div class="hero">
       <div class="card hero-body container my-6 p-5">
         <p id="ingredients-title" class="title is-2 mx-2">
           Meal Express
         </p>
-        <div class="content mx-2">
+        <div class="content mx-2 has-text-centered">
           <p>
-            Select common ingredients <br> and build your meal plan!
+            Pick # of Meals
+            <br> Select ingredients
+            <br> Search for meals!
           </p>
         </div>
-        <button id="search-btn" class="button is-success is-size-4 py-0"><i
-            class="fas fa-search pr-3"></i>Search</button>
+        <div class="search-btn buttons">
+          <button class='button search is-success is-size-4 py-0' title='Disabled button' disabled><i
+              class='fas fa-search pr-3'></i>Search</button>
+        </div>
+        <div class="buttons">
+          <button id="meal-btn" class="button is-success is-size-4 py-0">Pick # of Meals</button>
+        </div>
+      </div>
+      <!-- NAVIGATION -->
+      <div class="hero-foot">
+        <nav class="tabs is-boxed is-centered is-fullwidth">
+          <div class="container">
+            <ul>
+              <li><a>Home</a></li>
+              <li class="is-active"><a>Ingredients</a></li>
+              <li><a>History</a></li>
+            </ul>
+          </div>
+        </nav>
       </div>
     </div>
   </header>
+  <!-- INGREDIENTS SELECTION -->
   <section class="container">
     <div class="columns">
       <div class="column">
@@ -109,6 +191,7 @@
           <div class="card-content">
             <div class="buttons is-centered">
               <button class="ingrBtn button is-success is-outlined">Onion</button>
+              <button class="ingrBtn button is-success is-outlined">Garlic</button>
               <button class="ingrBtn button is-success is-outlined">Broccoli</button>
               <button class="ingrBtn button is-success is-outlined">Spinach</button>
               <button class="ingrBtn button is-success is-outlined">Tomato</button>
@@ -185,7 +268,7 @@
               <button class="ingrBtn button is-success is-outlined">Cheddar</button>
               <button class="ingrBtn button is-success is-outlined">Feta</button>
               <button class="ingrBtn button is-success is-outlined">Mozzarella</button>
-              <button class="ingrBtn button is-success is-outlined">Parmesan</button>
+              <button class="ingrBtn button is-success is-outlined">Parmesan Cheese</button>
               <button class="ingrBtn button is-success is-outlined">Blue Cheese</button>
             </div>
           </div>
@@ -207,6 +290,7 @@
               <button class="ingrBtn button is-success is-outlined">Ketchup</button>
               <button class="ingrBtn button is-success is-outlined">Mustard</button>
               <button class="ingrBtn button is-success is-outlined">Mayonnaise</button>
+              <button class="ingrBtn button is-success is-outlined">Tomato Sauce</button>
               <button class="ingrBtn button is-success is-outlined">Soy Sauce</button>
               <button class="ingrBtn button is-success is-outlined">BBQ Sauce</button>
               <button class="ingrBtn button is-success is-outlined">Pasta Sauce</button>
@@ -221,6 +305,10 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="search-btn">
+        <button class="button search is-success is-size-4 py-0 hide" title='Disabled button' disabled>
+          <i class="fas fa-search pr-3"></i>Search</button>
       </div>
     </div>
   </section>

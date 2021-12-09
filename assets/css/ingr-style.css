@@ -1,9 +1,14 @@
+:root {
+  --primary-color: #48c78e;
+  --secondary-color: #F2FBF7;
+}
+
 * {
   margin: 0px;
 }
 
 body {
-  background-color: #F2FBF7;
+  background-color: var(--secondary-color);
 }
 
 .hero {
@@ -12,19 +17,53 @@ body {
   background-repeat: no-repeat;
 }
 
+.tabs a {
+  color: #F2FBF7;
+}
+
+.tabs a:hover {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+}
+
+.tabs li.is-active a {
+  color: var(--primary-color)
+}
+
 #ingredients-title {
   font-family: 'Kaushan Script', cursive;
 }
 
-#search-btn {
+.media-content span {
+  font-family: 'Kaushan Script', cursive;
+}
+
+#start-btn {
+  padding: 0;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+
+}
+
+.search, #meal-btn {
   width: 100%;
 }
 
-.button.is-success.is-outlined:focus, .button.is-success.is-outlined:hover {
+.ingrBtn.button.is-success.is-outlined:focus {
   background-color: transparent;
-  border-color: #48c78e;
-  color: #48c78e
-} 
+  border-color: var(--primary-color);
+  color: var(--primary-color)
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .hide {
+    display: block;
+  }
+}
 
 @media screen and (min-width: 1100px) {
 
@@ -37,5 +76,7 @@ body {
   .hero-body {
     margin-left: 55%;
   }
-
+  section .card {
+    height: 100%;
+  }
 }
