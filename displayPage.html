@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meal Prep Express</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@400;700&family=Staatliches&display=swap"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <header class="box p-0">
+      <div class="hero">
+        <div class="card hero-body container my-6 p-5">
+          <h1 id="displayPage" class="title is-2 mx-2">Meal Express</h1>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="jokeSection">
+        <p>
+          Hope this joke can put a smile on your face,
+          <span id="joke" class="joke"> hey</span>
+        </p>
+      </div>
+      <div class="displayMeals columns">
+        <div class="column">
+          <div class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Recipe Title</p>
+                <button class="delete" aria-label="close"></button>
+              </header>
+              <section class="modal-card-body">
+                <!-- Content ... -->
+                testing
+              </section>
+              <footer class="modal-card-foot">
+                <button class="button is-success">Save recipe</button>
+                <button class="button">Replace recipe</button>
+              </footer>
+            </div>
+          </div>
+        </div>
+        <div class="column">day 2</div>
+        <div class="column">day 3</div>
+        <div class="column">day 4</div>
+        <div class="column">day 5</div>
+      </div>
+    </main>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
