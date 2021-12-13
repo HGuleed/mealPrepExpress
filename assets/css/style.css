@@ -1,3 +1,9 @@
 * {
   margin: 0px;
 }
+
+.container{
+  padding: 50vh 10vh; /* to vertically center "welcome to Meal Prep Express" */
+  text-align: center;
+}
+
