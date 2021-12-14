@@ -57,7 +57,7 @@ body {
   flex-grow: 0;
 }
 
-.dropdown-menu {
+.dropdown, .dropdown-menu {
   width: 100%;
 }
 
@@ -84,11 +84,11 @@ ul {
   list-style: disc; 
 }
 
-#instruction-dropdown, .dropdown-trigger {
+.rDropDown , .dropdown-trigger {
   width: 100%;
 }
 
-.instrBtn.button.is-fullwidth.is-success.is-outlined:focus {
+.rDropDown.button.is-fullwidth.is-success.is-outlined:focus {
   background-color: transparent;
   border-color: var(--primary-color);
   color: var(--primary-color);
