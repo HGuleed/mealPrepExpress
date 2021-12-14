@@ -1,7 +1,7 @@
 # Meal Prep Express
 
 ## User Story
-AS A busy individual interested in making my own meals I WANT a simple way to search for recipes SO THAT I can meal prep using ingredients I already have.
+AS A busy working professional interested in making my own meals I WANT a simple way to search for recipes with ingredients that I already have SO THAT I have more time to cook.
 
 ## Acceptance Criteria
 GIVEN I want to find recipes in order to meal prep
@@ -19,13 +19,14 @@ WHEN I close the browser and reopen the app later
 THEN I can see my previous recipes
 
 ## Image
-![Image of Meal Prep Express.]()
+![Image of Meal Prep Express.]() 
 
 ## Built With
 * HTML
 * CSS
 * Bulma 
 * jQuery
+* Server-side APIs
 
 ## Website
 (deployed website link will go here)
