@@ -46,6 +46,54 @@ body {
   width: 100%;
 }
 
+/* RECIPE CARD STYLING */
+.image img {
+  max-height: 100%;
+}
+
+.recipe-card {
+  width: 320px;
+  flex-basis: auto;
+  flex-grow: 0;
+}
+
+.dropdown-menu {
+  width: 100%;
+}
+
+.status {
+  width: 69px;
+  border-radius: 5px;
+}
+
+.status2 {
+  width: 57px;
+  border-radius: 5px;
+}
+
+.amounts-container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.amounts, .instructions {
+  font-size: 0.8rem;
+}
+
+ul {
+  list-style: disc; 
+}
+
+#instruction-dropdown, .dropdown-trigger {
+  width: 100%;
+}
+
+.instrBtn.button.is-fullwidth.is-success.is-outlined:focus {
+  background-color: transparent;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
 /* UTILITIES STYLING */
 .hide {
   display: none;
@@ -80,5 +128,9 @@ body {
 
   section .ingredient-card {
     height: 100%;
+  }
+  
+  .recipe-card header {
+    height: 180px;
   }
 }
