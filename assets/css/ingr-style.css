@@ -1,0 +1,127 @@
+:root {
+  --primary-color: #48c78e;
+  --secondary-color: #F2FBF7;
+}
+
+* {
+  margin: 0px;
+}
+
+body {
+  background-color: var(--secondary-color);
+}
+
+/* HERO/HEADER STYLING -------------------------------------- */
+.hero {
+  background-image: url("../images/banner-2.png");
+  background-position: bottom left;
+  background-repeat: no-repeat;
+}
+
+.tabs a {
+  color: #F2FBF7;
+}
+
+.tabs a:hover {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+}
+
+.tabs li.is-active a {
+  color: var(--primary-color)
+}
+
+/* INGREDIENTS PAGE STYLING ------------------------- */
+#ingredients-title {
+  font-family: 'Kaushan Script', cursive;
+}
+
+.ingrBtn.button.is-success.is-outlined:focus {
+  background-color: transparent;
+  border-color: var(--primary-color);
+  color: var(--primary-color)
+}
+
+.search-btn-bottom button {
+  width: 100%;
+}
+
+/* RECIPE CARD STYLING */
+.image img {
+  max-height: 100%;
+}
+
+.recipe-card {
+  width: 320px;
+  flex-basis: auto;
+  flex-grow: 0;
+}
+
+.status {
+  width: 69px;
+  border-radius: 5px;
+}
+
+.status2 {
+  width: 57px;
+  border-radius: 5px;
+}
+
+.amounts, .instructions {
+  font-size: 0.8rem;
+}
+
+ul {
+  list-style: disc; 
+}
+
+.rDropDown , .dropdown-trigger {
+  width: 100%;
+}
+
+.rDropDown.button.is-fullwidth.is-success.is-outlined:focus {
+  background-color: transparent;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* UTILITIES STYLING */
+.hide {
+  display: none;
+}
+
+/* WELCOME MODAL STYLING ---------------------------- */
+.media-content span {
+  font-family: 'Kaushan Script', cursive;
+}
+
+#start-btn {
+  padding: 0;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+#welcome-media {
+  margin-bottom: 1.5rem;
+}
+
+/* RESPONSIVENESS STYLING START --------------------- */
+@media screen and (min-width: 1100px) {
+
+  .hero {
+    background-image: url("../images/banner-1.png");
+    background-position: bottom left;
+    background-repeat: no-repeat;
+  }
+
+  .hero-body {
+    margin-left: 55%;
+  }
+
+  section .ingredient-card {
+    height: 100%;
+  }
+  
+  .recipe-card header {
+    height: 180px;
+  }
+}
