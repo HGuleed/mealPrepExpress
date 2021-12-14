@@ -57,10 +57,6 @@ body {
   flex-grow: 0;
 }
 
-.dropdown, .dropdown-menu {
-  width: 100%;
-}
-
 .status {
   width: 69px;
   border-radius: 5px;
@@ -69,11 +65,6 @@ body {
 .status2 {
   width: 57px;
   border-radius: 5px;
-}
-
-.amounts-container {
-  padding-top: 0;
-  padding-bottom: 0;
 }
 
 .amounts, .instructions {

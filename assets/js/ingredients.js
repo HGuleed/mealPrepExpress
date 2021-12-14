@@ -144,7 +144,7 @@ var buildRecipeCard = function (recipe) {
   var rTitle = $('<p>').addClass('card-header-title title-is-4').text(recipe.recipeTitle);
   var rImageDiv = $('<div>').addClass('card-image');
   var rFigure = $('<figure>').addClass('image is 4by3');
-  var rMainImg = $('<img>').attr('src', recipe.recipeImage).attr('alt', 'recipe image');
+  var rMainImg = $('<img>').attr('src', recipe.recipeImage).attr('alt', recipe.recipeTitle);
 
   // recipe card ingredients drop down element(ib)
   var ibContainer = $('<div>').addClass('dropdown');
@@ -161,13 +161,13 @@ var buildRecipeCard = function (recipe) {
   var iMedia = $('<div>').addClass('ingredient-img media my-0 pt-2');
   var iMediaLeft = $('<div>').addClass('media-left');
   var iFigure = $('<figure>').addClass('image level is-32x32');
-  var iImage = $('<img>').addClass('is-rounded level-item').attr('alt', 'ingredient image');
+  var iImage = $('<img>').addClass('is-rounded level-item');
   var iMediaContent = $('<div>').addClass('media-content');
   var iTitle = $('<p>').addClass('title is-6');
   var iStatus = $('<p>').addClass('status subtitle is-7 px-2');
 
   // recipe card amounts(a)
-  var aContainer = $('<div>').addClass('amounts-container card-content');
+  var aContainer = $('<div>').addClass('amounts-container card-content py-0');
   var aList = $('<ul>').addClass('content amounts ml-3');
   var aAmount = $('<li>');
 
@@ -210,7 +210,7 @@ var buildRecipeCard = function (recipe) {
     console.log(recipe.missingImages[i])
     iMediaLeft.append(iFigure);
     iMedia.append(iMediaLeft);
-    iMediaContent.append(iTitle.text(recipe.missingIngredients[i]), iStatus.text('missing').addClass('has-background-grey-lighter'));
+    iMediaContent.append(iTitle.text(recipe.missingIngredients[i]), iStatus.text('missing').addClass('status2 has-background-grey-lighter'));
     iMedia.append(iMediaContent);
     // add missing ingredients to ingredient card content
     console.log(iTitle.text());
@@ -219,11 +219,11 @@ var buildRecipeCard = function (recipe) {
 
   // loop through used ingredients and populate card
   for (var i = 0; i < recipe.usedIngredients.length; i++) {
-    iFigure.append(iImage.attr('src', recipe.usedImages[i]));
+    iFigure.append(iImage.attr('src', recipe.usedImages[i]).attr('alt', recipe.usedIngredients[i]));
     iMediaLeft.append(iFigure);
     iMedia.append(iMediaLeft);
 
-    iMediaContent.append(iTitle.text(recipe.usedIngredients[i]), iStatus.text('in kitchen').removeClass('has-background-grey-lighter').addClass('has-text-white has-background-success'));
+    iMediaContent.append(iTitle.text(recipe.usedIngredients[i]), iStatus.text('in kitchen').addClass('status has-text-white has-background-success'));
     iMedia.append(iMediaContent);
 
     // add used ingredients to ingredient card content
