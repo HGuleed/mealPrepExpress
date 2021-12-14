@@ -19,7 +19,7 @@ body {
 }
 
 .tabs a {
-  color: #F2FBF7;
+  color: var(--secondary-color);
 }
 
 .tabs a:hover {
@@ -75,7 +75,7 @@ ul {
   list-style: disc; 
 }
 
-.rDropDown , .dropdown-trigger {
+.rDropDown, .dropdown-trigger, .dropdown, .dropdown-menu {
   width: 100%;
 }
 

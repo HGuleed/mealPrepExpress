@@ -39,6 +39,7 @@ var getFoodApi = function (ingrListStr) {                                       
         console.log(data);
         parseRecipeData(data);
         dropDownMenu();
+        favoriteButton();
       });
     } else {
       alert("Error: No response from API!");
@@ -127,6 +128,9 @@ var loadFromStorage = function () {
   for (var i = 0; i < localStorage.length; i++) {
     var pastRecipe = JSON.parse(localStorage.getItem("Recipe Card " + i));
     console.log(pastRecipe);
+    // give button functionality 
+    dropDownMenu();
+    favoriteButton();
     // build recipe cards from stored data
     buildRecipeCard(pastRecipe);
   }
@@ -134,7 +138,11 @@ var loadFromStorage = function () {
 
 // =========================================================== RECIPE CARD CREATION ================================================================
 var buildRecipeCard = function (recipe) {
-  // take data from storage and build history page elements
+  // recipe card favorite button
+  var fButtonContainer = $('<p>').addClass('buttons');
+  var fButton = $('<button>').addClass('button favorite');
+  var fIconSpan = $('<span>').addClass('icon is-small');
+  var fIcon = $('<i>').addClass('fstar far fa-star');
 
   // recipe card header(r)
   var rColumns = $('.recipe-columns');
@@ -160,11 +168,11 @@ var buildRecipeCard = function (recipe) {
   var iCardContent = $('<div>').addClass('card-content pt-0');
   var iMedia = $('<div>').addClass('ingredient-img media my-0 pt-2');
   var iMediaLeft = $('<div>').addClass('media-left');
-  var iFigure = $('<figure>').addClass('image level is-32x32');
+  var iFigure = $('<figure>').addClass('image level is-48x48');
   var iImage = $('<img>').addClass('is-rounded level-item');
   var iMediaContent = $('<div>').addClass('media-content');
-  var iTitle = $('<p>').addClass('title is-6');
-  var iStatus = $('<p>').addClass('status subtitle is-7 px-2');
+  var iTitle = $('<p>').addClass('title is-5');
+  var iStatus = $('<p>');
 
   // recipe card amounts(a)
   var aContainer = $('<div>').addClass('amounts-container card-content py-0');
@@ -183,6 +191,12 @@ var buildRecipeCard = function (recipe) {
   var ddStep = $('<p>').addClass('mb-4');
 
   // build recipe card ---------------------------------------------
+  // recipe card favorite button
+  fIconSpan.append(fIcon);
+  fButton.append(fIconSpan);
+  fButtonContainer.append(fButton);
+  rCard.append(fButtonContainer);
+
   // recipe card header
   rCardHead.append(rTitle);
   // add header to recipe card
@@ -210,7 +224,7 @@ var buildRecipeCard = function (recipe) {
     console.log(recipe.missingImages[i])
     iMediaLeft.append(iFigure);
     iMedia.append(iMediaLeft);
-    iMediaContent.append(iTitle.text(recipe.missingIngredients[i]), iStatus.text('missing').addClass('status2 has-background-grey-lighter'));
+    iMediaContent.append(iTitle.text(recipe.missingIngredients[i]), iStatus.text('missing').addClass('status2 subtitle is-7 px-2 has-background-grey-lighter'));
     iMedia.append(iMediaContent);
     // add missing ingredients to ingredient card content
     console.log(iTitle.text());
@@ -223,7 +237,7 @@ var buildRecipeCard = function (recipe) {
     iMediaLeft.append(iFigure);
     iMedia.append(iMediaLeft);
 
-    iMediaContent.append(iTitle.text(recipe.usedIngredients[i]), iStatus.text('in kitchen').addClass('status has-text-white has-background-success'));
+    iMediaContent.append(iTitle.text(recipe.usedIngredients[i]), iStatus.text('in kitchen').removeClass('status2 subtitle is-7 px-2 has-background-grey-lighter').addClass('status subtitle is-7 px-2 has-text-white has-background-success'));
     iMedia.append(iMediaContent);
 
     // add used ingredients to ingredient card content
@@ -279,24 +293,6 @@ var buildRecipeCard = function (recipe) {
   rColumns.append(rColumn);
 };
 //-------------------------------------------------------------------------------------------------------------------------------
-
-// drop down menu functionality -----------------------
-var dropDownMenu = function () {
-  $('.rDropDown').on('click', function () {
-    // get class of dropdown div when clicking button
-    var dropDownState = $(this).parent().parent().attr('class');
-    console.log("Drop down clicked");
-    console.log(dropDownState);
-    // trigger the drop down if it is not active, otherwise deactivate  
-    if (dropDownState == "dropdown") {
-      $(this).parent().parent().addClass('is-active')
-      $(this).removeClass('is-outlined');
-    } else {
-      $(this).parent().parent().removeClass('is-active')
-      $(this).addClass('is-outlined');
-    }
-  });
-};
 
 // ================================ BUTTON LISTENERS ============================================================================
 // ingredient btn listner ------------------------------------------------------------------
@@ -397,4 +393,40 @@ $('#favorite-tab').on('click', function () {
   $('.recipe-card').addClass('hide');
   // loadFromStorage();
 });
+
+// favorite button functionality ----------------------
+var favoriteButton = function () {
+  $('.favorite').on('click', function () {
+    var favoriteState = $(this).children().children().attr('class');
+    console.log("Favorite button clicked!");
+    if (favoriteState == "fstar far fa-star") {
+      $(this).children().children().removeClass('far fa-star').addClass('fas fa-star');
+      console.log("Added to favorites!")
+      // saveToStorage();
+    } else {
+      $(this).children().children().removeClass('fas fa-star').addClass('far fa-star');
+      console.log("Removed from favorites!")
+    }
+  })
+};
+
+// drop down menu functionality -----------------------
+var dropDownMenu = function () {
+  $('.rDropDown').on('click', function () {
+    // get class of dropdown div when clicking button
+    var dropDownState = $(this).parent().parent().attr('class');
+    console.log("Drop down clicked");
+    // trigger the drop down if it is not active, otherwise deactivate  
+    if (dropDownState == "dropdown") {
+      $(this).parent().parent().addClass('is-active')
+      $(this).removeClass('is-outlined');
+      console.log("Drop down is active!")
+    } else {
+      $(this).parent().parent().removeClass('is-active')
+      $(this).addClass('is-outlined');
+      console.log("Drop down deactivated!")
+    }
+  });
+};
+
 // loadFromStorage();
