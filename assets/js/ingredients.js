@@ -2,8 +2,8 @@ var ingredientList = []; // fills with selected ingredient
 var nmbOfMeals = 0;
 
 // Welcome page clock 
-var clock = document.getElementById("current-day")
-clock.textContent = moment().format("h:mm A - D MMM YYYY")
+var clock = document.getElementById("current-day");
+clock.textContent = moment().format("h:mm A - D MMM YYYY");
 
 // alters state of the search button -------------------------------------------------------
 var searchBtnState = function () {
@@ -57,7 +57,7 @@ var parseRecipeData = function (recipe) {
       recipeImage: "",
       missingIngredients: [],
       missingImages: [],
-      usedIngrededients: [],
+      usedIngredients: [],
       usedImages: [],
       missingAmounts: [],
       usedAmounts: [],
@@ -71,7 +71,6 @@ var parseRecipeData = function (recipe) {
     // add data to recipe card 
     recipeCard.recipeTitle = rtitle;
     recipeCard.recipeImage = rImg;
-
 
     // get all recipe specific data for missing ingredients
     var missedIngred = recipe.results[i].missedIngredients;
@@ -96,11 +95,11 @@ var parseRecipeData = function (recipe) {
       var usedImg = usedIngred[k].image;
 
       // add data to recipe card arry
-      recipeCard.usedIngrededients.push(usedIng);
+      recipeCard.usedIngredients.push(usedIng);
       recipeCard.usedAmounts.push(usedAmt);
       recipeCard.usedImages.push(usedImg);
     }
-    
+
     // get all recipe specific instructions
     var recipeInstr = recipe.results[i].analyzedInstructions[0].steps
     for (var h = 0; h < recipeInstr.length; h++) {
@@ -110,14 +109,17 @@ var parseRecipeData = function (recipe) {
       // add data to recipe card arry
       recipeCard.recipeSteps.push(recStep);
     }
-    saveToStorage(i, recipeCard);
+    // saveToStorage(recipeCard);
+    buildRecipeCard(recipeCard);
     console.log(recipeCard);
   }
 };
 
 // saving searched recipes to local storage 
-var saveToStorage = function (i, recipeCard) {
-  localStorage.setItem("Recipe Card " + i, JSON.stringify(recipeCard));
+var saveToStorage = function (recipeCard) {
+  recipeIndexEnd = localStorage.length;
+  localStorage.setItem("Recipe Card " + recipeIndexEnd, JSON.stringify(recipeCard));
+  recipeIndexEnd++
 };
 
 // loading recipes from storage
@@ -125,15 +127,12 @@ var loadFromStorage = function () {
   for (var i = 0; i < localStorage.length; i++) {
     var pastRecipe = JSON.parse(localStorage.getItem("Recipe Card " + i));
     console.log(pastRecipe);
-    // buildHistoryPage(pastRecipe);
+    // build recipe cards from stored data
+    // buildRecipeCard(pastRecipe);
   }
 };
 
-var buildHistoryPage = function (pastRecipe) {
-  // take data from storage and build history page elements
-};
-
-// ================================ BUTTON LISTENERS =======================================
+// ================================ BUTTON LISTENERS ============================================================================
 // ingredient btn listner ------------------------------------------------------------------
 $('.ingrBtn').on('click', function () {
   var btnState = $(this).attr('class');
@@ -188,27 +187,49 @@ $('.modal-close').on('click', function () {
 // search button listener, queries API -----------------------------------------------------
 $('.search-btn').on('click', function () {
   console.log("search clicked!");
-  console.log(ingredientList)
-  console.log("# of meals: " + nmbOfMeals)
-  localStorage.clear()
+  console.log(ingredientList);
+  console.log("# of meals: " + nmbOfMeals);
   listToString(ingredientList);
+  $('#current-tab').trigger('click')
 });
 
 // welcome message listener, start, X, & background closes welcome modal -------------------
 $('#modal-background').add('#start-btn').add('.modal-close').on('click', function () {
   $('#welcome-modal').removeClass("is-active");
   $('#welcome-tab').removeClass("is-active");
-  $('#ingredient-tab').addClass("is-active");
 });
 
 // HOME button brings up welcome modal -----------------------------------------------------
 $('#welcome-tab').on('click', function () {
   $('#welcome-modal').addClass("is-active");
   $('#welcome-tab').addClass("is-active");
-  $('#ingredient-tab').removeClass("is-active");
 });
 
-// HISTORY button brings up previous meals screen ------------------------------------------
-$('#history-tab').on('click', function () {
-  loadFromStorage();
+// INGREDIENTS button brings up ingredients screen
+$('#ingredient-tab').on('click', function () {
+  $('#ingredients-container').removeClass('hide');
+  $('#ingredient-tab').addClass('is-active');
+  $('#current-tab').removeClass("is-active");
+  $('#favorite-tab').removeClass('is-active');
+  $('.recipe-card').addClass('hide');
 });
+
+// CURRENT button brings up current meals screen ------------------------------------------
+$('#current-tab').on('click', function () {
+  $('#ingredient-tab').removeClass('is-active');
+  $('#ingredients-container').addClass('hide');
+  $('#current-tab').addClass('is-active');
+  $('#favorite-tab').removeClass('is-active');
+  $('.recipe-card').removeClass('hide');  
+});
+
+// FAVORITE button brings up current meals screen ------------------------------------------
+$('#favorite-tab').on('click', function () {
+  $('#ingredient-tab').removeClass('is-active');
+  $('#current-tab').removeClass("is-active");
+  $('#ingredients-container').addClass('hide');
+  $('#favorite-tab').addClass('is-active');
+  $('.recipe-card').addClass('hide');
+  // loadFromStorage();
+});
+// loadFromStorage();

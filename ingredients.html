@@ -23,12 +23,12 @@
     <div class="modal-content">
       <div class="card">
         <div class="card-image">
-          <figure class="image is-4by3">
+          <figure class="recipe-image image is-4by3">
             <img src="./assets/images/welcome-background.jpg" alt="Placeholder image">
           </figure>
         </div>
         <div class="card-content">
-          <div class="media">
+          <div id="welcome-media" class="media">
             <div class="media-left">
               <button id="start-btn" class='button is-success is-outlined is-rounded is-large px-4'>Start</button>
             </div>
@@ -40,7 +40,7 @@
           </div>
           <div class="content is-size-5">
             <p class="mx-4">
-              Meal Express, where you can conveniently build a dinner 
+              Meal Express, where you can conveniently build a dinner
               plan for the work week with the items you have in your kitchen!
             </p>
             <a href="#">@portfolio1</a>
@@ -107,7 +107,8 @@
             <ul>
               <li id="welcome-tab" class="is-active"><a>Home</a></li>
               <li id="ingredient-tab"><a>Ingredients</a></li>
-              <li id="history-tab"><a>History</a></li>
+              <li id="current-tab"><a>Current</a></li>
+              <li id="favorite-tab"><a>Favorites</a></li>
             </ul>
           </div>
         </nav>
@@ -115,10 +116,10 @@
     </div>
   </header>
   <!-- INGREDIENTS SELECTION ------------------------------------------------------------------------->
-  <section class="container">
-    <div class="ingredient-cards columns">
+  <section id="ingredients-container" class="container">
+    <div class="columns">
       <div class="column">
-        <div class="card">
+        <div class="card ingredient-card">
           <header class="card-header ml-3 mb-0 title is-4 color-3">
             <figure class="image is-64x64 m-2">
               <img class="is-rounded" src="./assets/images/meat-img.png">
@@ -130,7 +131,7 @@
           <div class="card-content">
             <div class="buttons is-centered">
               <button class="ingrBtn button is-success is-outlined">Chicken</button>
-              <button class="ingrBtn button is-success is-outlined">Ground Beef</button>
+              <button class="ingrBtn button is-success is-outlined">Beef</button>
               <button class="ingrBtn button is-success is-outlined">Bacon</button>
               <button class="ingrBtn button is-success is-outlined">Ham</button>
               <button class="ingrBtn button is-success is-outlined">Pork</button>
@@ -152,7 +153,7 @@
         </div>
       </div>
       <div class="column">
-        <div class="card">
+        <div class="card ingredient-card">
           <header class="card-header ml-3 mb-0 title is-4 color-3">
             <figure class="image is-64x64 m-2">
               <img class="is-rounded" src="./assets/images/grains-img.png">
@@ -178,8 +179,8 @@
           </div>
         </div>
       </div>
-      <div class="column color-test">
-        <div class="card ">
+      <div class="column">
+        <div class="card ingredient-card">
           <header class="card-header ml-3 mb-0 title is-4 color-3">
             <figure class="image is-64x64 m-2">
               <img class="is-rounded" src="./assets/images/vegetables-img.png">
@@ -214,9 +215,9 @@
         </div>
       </div>
     </div>
-    <div class="ingredient-cards columns">
+    <div class="columns">
       <div class="column">
-        <div class="card">
+        <div class="card ingredient-card">
           <header class="card-header ml-3 mb-0 title is-4 color-3">
             <figure class="image is-64x64 m-2">
               <img class="is-rounded" src="./assets/images/fruit-img.png">
@@ -228,7 +229,7 @@
           <div class="card-content">
             <div class="buttons is-centered">
               <button class="ingrBtn button is-success is-outlined">Apple</button>
-              <button class="ingrBtn button is-success is-outlined">Avacado</button>
+              <button class="ingrBtn button is-success is-outlined">Avacados</button>
               <button class="ingrBtn button is-success is-outlined">Banana</button>
               <button class="ingrBtn button is-success is-outlined">Orange</button>
               <button class="ingrBtn button is-success is-outlined">Strawberry</button>
@@ -248,7 +249,7 @@
         </div>
       </div>
       <div class="column">
-        <div class="card">
+        <div class="card ingredient-card">
           <header class="card-header ml-3 mb-0 title is-4 color-3">
             <figure class="image is-64x64 m-2">
               <img class="is-rounded" src="./assets/images/dairy-img.png">
@@ -277,7 +278,7 @@
         </div>
       </div>
       <div class="column">
-        <div class="card">
+        <div class="card ingredient-card">
 
           <header class="card-header ml-3 mb-0 title is-4 color-3">
             <figure class="image is-64x64 m-2">
@@ -308,13 +309,12 @@
           </div>
         </div>
       </div>
-      <div class="search-btn-bottom">
-        <button class="button search is-success is-size-4 py-0 hide" title='Disabled button' disabled>
+      <div class="search-btn-bottom is-hidden-tablet">
+        <button class="button search is-success is-size-4 py-0" title='Disabled button' disabled>
           <i class="fas fa-search pr-3"></i>Search</button>
       </div>
     </div>
   </section>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-ui-touch-punch@0.2.3/jquery.ui.touch-punch.min.js"></script>
