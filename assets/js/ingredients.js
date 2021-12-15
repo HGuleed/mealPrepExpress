@@ -1,6 +1,6 @@
 var ingredientList = []; // fills with selected ingredient
 var nmbOfMeals = 0; // globally scoped integer for number of meals
-var runDisplayOnce = 0; 
+var runDisplayOnce = 0; // control for building favorites from local storage
 var recipeCardArray = []; // fills with called recipe card objects
 var storedRecipeArray = [] // fills with stored recipe card objects
 
@@ -33,7 +33,7 @@ var listToString = function (ingredientList) {
 // **ADD YOUR API KEY**
 // Search by ingredient call --------------------------------------------------------------
 var getFoodApi = function (ingrListStr) {                                                                                                                                                                        // --------- // 
-  foodTest = "https://api.spoonacular.com/recipes/complexSearch?query=all&addRecipeInformation=true&instructionsRequired=true&includeIngredients=" + ingrListStr + "&number=" + nmbOfMeals + "&fillIngredients=true&sort=max-used-ingredients&apiKey=d2c8f16302ed4e7e87a7101f1bf935e8";                                                                                                                                                                                    // --------- // 
+  foodTest = "https://api.spoonacular.com/recipes/complexSearch?query=all&addRecipeInformation=true&instructionsRequired=true&includeIngredients=" + ingrListStr + "&number=" + nmbOfMeals + "&fillIngredients=true&type=main%20course&sort=min-missing-ingredients&apiKey=d2c8f16302ed4e7e87a7101f1bf935e8";                                                                                                                                                                                    // --------- // 
   console.log(foodTest);
   fetch(foodTest).then(function (response) {
     if (response.ok) {
@@ -109,13 +109,15 @@ var parseRecipeData = function (recipe) {
     }
 
     // get all recipe specific instructions
-    var recipeInstr = recipe.results[i].analyzedInstructions[0].steps
-    for (var h = 0; h < recipeInstr.length; h++) {
-      // get recipe steps 
-      var recStep = recipeInstr[h].step;
+    if (recipe.results[i].analyzedInstructions.length > 0) {
+      var recipeInstr = recipe.results[i].analyzedInstructions[0].steps
+      for (var h = 0; h < recipeInstr.length; h++) {
+        // get recipe steps 
+        var recStep = recipeInstr[h].step;
 
-      // add data to recipe card arry
-      recipeCard.recipeSteps.push(recStep);
+        // add data to recipe card arry
+        recipeCard.recipeSteps.push(recStep);
+      }
     }
     buildRecipeCard(i, recipeCard);
     recipeCardArray.push(recipeCard);
@@ -144,18 +146,18 @@ var saveToStorage2 = function (recipeId, recipeIndex) {
 // remove recipe from local storage
 var removeFromStorage = function (recipeId) {
   // idCounter = localStorage.length - 1;
-  console.log("recipe ID: "+recipeId);
+  console.log("recipe ID: " + recipeId);
   console.log("remove idcounter: " + recipeId)
   localStorage.removeItem("Recipe Card " + recipeId);
 };
 
 // loading recipes from storage
 var loadFromStorage = function () {
-  for (var i =0; i < localStorage.length; i++) {
+  for (var i = 0; i < localStorage.length; i++) {
     var pastRecipe = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if (pastRecipe != null) {
-    storedRecipeArray.push(pastRecipe)
-    console.log(pastRecipe);
+      storedRecipeArray.push(pastRecipe)
+      console.log(pastRecipe);
     }
   }
   console.log(storedRecipeArray);
@@ -165,7 +167,6 @@ var loadFromStorage = function () {
 var displayFavorites = function () {
   for (var i = 0; i < storedRecipeArray.length; i++) {
     // build recipe cards from stored data
-    var storedIndex = 
     buildRecipeCard(i, storedRecipeArray[i]);
   }
   // give button functionality 
@@ -183,9 +184,9 @@ var displayFavorites = function () {
 var buildRecipeCard = function (i, recipeCard) {
 
   // recipe card favorite button
-  var fButtonContainer = $('<p>').addClass('buttons');
-  var fButton = $('<button>').addClass('button favorite').attr('id', recipeCard.recId).attr('index', i);
-  var fIconSpan = $('<span>').addClass('icon is-small');
+  var fButtonContainer = $('<p>').addClass('buttons fav-cont');
+  var fButton = $('<button>').addClass('button favorite is-large is-white').attr('id', recipeCard.recId).attr('index', i);
+  var fIconSpan = $('<span>').addClass('icon is-large');
   var fIcon = $('<i>').addClass('fstar far fa-star');
 
   // recipe card header(r)
@@ -193,7 +194,7 @@ var buildRecipeCard = function (i, recipeCard) {
   var rColumn = $('<div>').addClass('recipe-card column');
   var rCard = $('<div>').addClass('card');
   var rCardHead = $('<header>').addClass('card-header mb-0 title is-4 color-3');
-  var rTitle = $('<p>').addClass('card-header-title title-is-4').text(recipeCard.recipeTitle);
+  var rTitle = $('<p>').addClass('card-header-title title-is-4 pt-0 pb-5').text(recipeCard.recipeTitle);
   var rImageDiv = $('<div>').addClass('card-image');
   var rFigure = $('<figure>').addClass('image is 4by3');
   var rMainImg = $('<img>').attr('src', recipeCard.recipeImage).attr('alt', recipeCard.recipeTitle);
@@ -343,7 +344,7 @@ var buildRecipeCard = function (i, recipeCard) {
 $('.ingrBtn').on('click', function () {
   var btnState = $(this).attr('class');
   // clicked btn text, minus spaces, to lower case. 
-  var ingredient = $(this).text().replaceAll(" ", "").toLowerCase();
+  var ingredient = $(this).text().replaceAll(" ", "%20").toLowerCase();
 
   // when button is first clicked, add ingr, turn solid clr
   if (btnState == "ingrBtn button is-success is-outlined") {

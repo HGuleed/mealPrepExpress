@@ -75,6 +75,10 @@ body {
 }
 
 /* RECIPE CARD STYLING */
+.fav-cont, .fav-cont button {
+  margin-bottom: 0!important;
+}
+
 .image img {
   max-height: 100%;
 }
@@ -85,8 +89,8 @@ body {
   flex-grow: 0;
 }
 
-.recipe-card .card, .favorite-card .card {
-  height: 100%;
+.recipe-card i, .favorite-card i {
+  color: var(--primary-color);
 }
 
 .status {
@@ -121,7 +125,6 @@ ul {
 .hide {
   display: none;
 }
-
 
 /* WELCOME MODAL STYLING ---------------------------- */
 .media-content span {
