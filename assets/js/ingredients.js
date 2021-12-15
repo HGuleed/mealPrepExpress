@@ -1,18 +1,8 @@
 var ingredientList = []; // fills with selected ingredient
 var nmbOfMeals = 0; // globally scoped integer for number of meals
+var runDisplayOnce = 0; 
 var recipeCardArray = []; // fills with called recipe card objects
 var storedRecipeArray = [] // fills with stored recipe card objects
-var recipeCard = { // recipe card object 
-  recipeTitle: "",
-  recipeImage: "",
-  missingIngredients: [],
-  missingImages: [],
-  usedIngredients: [],
-  usedImages: [],
-  missingAmounts: [],
-  usedAmounts: [],
-  recipeSteps: []
-};
 
 // Welcome page clock 
 var clock = document.getElementById("current-day");
@@ -43,7 +33,7 @@ var listToString = function (ingredientList) {
 // **ADD YOUR API KEY**
 // Search by ingredient call --------------------------------------------------------------
 var getFoodApi = function (ingrListStr) {                                                                                                                                                                        // --------- // 
-  foodTest = "https://api.spoonacular.com/recipes/complexSearch?query=all&addRecipeInformation=true&instructionsRequired=true&includeIngredients=" + ingrListStr + "&number=" + nmbOfMeals + "&fillIngredients=true&sort=max-used-ingredients&apiKey=74930b30746b4ed6824607ad1b62352a";                                                                                                                                                                                    // --------- // 
+  foodTest = "https://api.spoonacular.com/recipes/complexSearch?query=all&addRecipeInformation=true&instructionsRequired=true&includeIngredients=" + ingrListStr + "&number=" + nmbOfMeals + "&fillIngredients=true&sort=max-used-ingredients&apiKey=d2c8f16302ed4e7e87a7101f1bf935e8";                                                                                                                                                                                    // --------- // 
   console.log(foodTest);
   fetch(foodTest).then(function (response) {
     if (response.ok) {
@@ -66,14 +56,28 @@ var getFoodApi = function (ingrListStr) {                                       
 // Gather necessary data from API call ----------------------------------------------------
 var parseRecipeData = function (recipe) {
   for (var i = 0; i < recipe.results.length; i++) {
-    // create 
+    var recipeCard = { // recipe card object 
+      recipeTitle: "",
+      recId: "",
+      recipeImage: "",
+      missingIngredients: [],
+      missingImages: [],
+      usedIngredients: [],
+      usedImages: [],
+      missingAmounts: [],
+      usedAmounts: [],
+      recipeSteps: []
+    };
 
     // get recipe title, main image, and missed ingredient count
     var rtitle = recipe.results[i].title;
+    var rId = recipe.results[i].id;
     var rImg = recipe.results[i].image;
+    console.log(rId)
 
     // add data to recipe card 
     recipeCard.recipeTitle = rtitle;
+    recipeCard.recId = rId;
     recipeCard.recipeImage = rImg;
 
     // get all recipe specific data for missing ingredients
@@ -113,58 +117,74 @@ var parseRecipeData = function (recipe) {
       // add data to recipe card arry
       recipeCard.recipeSteps.push(recStep);
     }
-    recipeCardArray.push(recipeCard)
-    console.log(recipeCard);
-    console.log(recipeCardArray);
     buildRecipeCard(i, recipeCard);
+    recipeCardArray.push(recipeCard);
+    console.log(recipeCardArray);
   }
 };
 
 //------------------------------------LOCAL STORAGE-------------------------------------------------------
 // save recipe to local storage
-var saveToStorage = function (recipeId) {
+var saveToStorage = function (recipeId, recipeIndex) {
   console.log(recipeId);
+  console.log(recipeIndex);
+  console.log(recipeCardArray);
+  idCounter = localStorage.length;
+  localStorage.setItem("Recipe Card " + recipeId, JSON.stringify(recipeCardArray[recipeIndex]));
+};
+
+var saveToStorage2 = function (recipeId, recipeIndex) {
+  console.log(recipeId);
+  console.log(recipeIndex);
   console.log(storedRecipeArray);
   idCounter = localStorage.length;
-  localStorage.setItem("Recipe Card " + idCounter, JSON.stringify(storedRecipeArray[recipeId]));
+  localStorage.setItem("Recipe Card " + recipeId, JSON.stringify(storedRecipeArray[recipeIndex]));
 };
 
 // remove recipe from local storage
-var removeFromStorage = function () {
-  idCounter = localStorage.length - 1;
-  localStorage.removeItem("Recipe Card " + idCounter)
-}
+var removeFromStorage = function (recipeId) {
+  // idCounter = localStorage.length - 1;
+  console.log("recipe ID: "+recipeId);
+  console.log("remove idcounter: " + recipeId)
+  localStorage.removeItem("Recipe Card " + recipeId);
+};
 
 // loading recipes from storage
 var loadFromStorage = function () {
-  for (var i = 0; i < localStorage.length; i++) {
-    var pastRecipe = JSON.parse(localStorage.getItem("Recipe Card " + i));
-    console.log(pastRecipe);
+  for (var i =0; i < localStorage.length; i++) {
+    var pastRecipe = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if (pastRecipe != null) {
     storedRecipeArray.push(pastRecipe)
+    console.log(pastRecipe);
+    }
   }
-}
+  console.log(storedRecipeArray);
+};
 
 // build recipe cards from displays 
 var displayFavorites = function () {
   for (var i = 0; i < storedRecipeArray.length; i++) {
-    console.log(storedRecipeArray);
     // build recipe cards from stored data
+    var storedIndex = 
     buildRecipeCard(i, storedRecipeArray[i]);
   }
   // give button functionality 
   dropDownMenu();
-  favoriteButton();
+  // favoriteButton();
 
+  runDisplayOnce++
   // change to favorited icon
   $('.fstar').removeClass('far fa-star').addClass('fas fa-star');
+  $('.recipe-card').removeClass('recipe-card').addClass('favorite-card');
+  $('.favorite').removeClass('favorite').addClass('stored-favorite');
 };
 
 // =========================================================== RECIPE CARD CREATION ================================================================
 var buildRecipeCard = function (i, recipeCard) {
-  console.log(recipeCard)
+
   // recipe card favorite button
   var fButtonContainer = $('<p>').addClass('buttons');
-  var fButton = $('<button>').addClass('button favorite').attr('id', i);
+  var fButton = $('<button>').addClass('button favorite').attr('id', recipeCard.recId).attr('index', i);
   var fIconSpan = $('<span>').addClass('icon is-small');
   var fIcon = $('<i>').addClass('fstar far fa-star');
 
@@ -374,6 +394,7 @@ $('.search-btn').on('click', function () {
   console.log("search clicked!");
   console.log(ingredientList);
   console.log("# of meals: " + nmbOfMeals);
+  $('.recipe-card').remove();
   listToString(ingredientList);
   $('#current-tab').trigger('click')
 });
@@ -397,6 +418,7 @@ $('#ingredient-tab').on('click', function () {
   $('#current-tab').removeClass("is-active");
   $('#favorite-tab').removeClass('is-active');
   $('.recipe-card').addClass('hide');
+  $('.favorite-card').addClass('hide');
 });
 
 // CURRENT button brings up current meals screen ------------------------------------------
@@ -406,6 +428,7 @@ $('#current-tab').on('click', function () {
   $('#current-tab').addClass('is-active');
   $('#favorite-tab').removeClass('is-active');
   $('.recipe-card').removeClass('hide');
+  $('.favorite-card').addClass('hide');
 });
 
 // FAVORITE button brings up current meals screen ------------------------------------------
@@ -415,7 +438,12 @@ $('#favorite-tab').on('click', function () {
   $('#ingredients-container').addClass('hide');
   $('#favorite-tab').addClass('is-active');
   $('.recipe-card').addClass('hide');
-  displayFavorites();
+  $('.favorite-card').removeClass('hide');
+
+  if (runDisplayOnce < 1) {
+    displayFavorites();
+    favoriteButton2();
+  }
 });
 
 // favorite button functionality ----------------------
@@ -423,16 +451,39 @@ var favoriteButton = function () {
   $('.favorite').on('click', function () {
     var favoriteState = $(this).children().children().attr('class');
     var recipeId = $(this).attr('id');
-
+    var recipeIndex = $(this).attr('index');
+    console.log(favoriteState);
+    console.log(recipeId);
     console.log("Favorite button clicked!");
     if (favoriteState == "fstar far fa-star") {
       $(this).children().children().removeClass('far fa-star').addClass('fas fa-star');
       console.log("Added to favorites!");
-      saveToStorage(recipeId);
+      saveToStorage(recipeId, recipeIndex);
     } else {
       $(this).children().children().removeClass('fas fa-star').addClass('far fa-star');
       console.log("Removed from favorites!");
-      removeFromStorage()
+      removeFromStorage(recipeId, recipeIndex)
+    }
+  })
+};
+
+// favorite button functionality ----------------------
+var favoriteButton2 = function () {
+  $('.stored-favorite').on('click', function () {
+    var favoriteState = $(this).children().children().attr('class');
+    var recipeId = $(this).attr('id');
+    var recipeIndex = $(this).attr('index');
+    console.log(favoriteState);
+    console.log(recipeId);
+    console.log("Stored Favorite button clicked!");
+    if (favoriteState == "fstar far fa-star") {
+      $(this).children().children().removeClass('far fa-star').addClass('fas fa-star');
+      console.log("Added to favorites!");
+      saveToStorage2(recipeId, recipeIndex);
+    } else {
+      $(this).children().children().removeClass('fas fa-star').addClass('far fa-star');
+      console.log("Removed from favorites!");
+      removeFromStorage(recipeId, recipeIndex)
     }
   })
 };

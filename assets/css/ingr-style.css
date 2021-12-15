@@ -51,10 +51,13 @@ body {
   max-height: 100%;
 }
 
-.recipe-card {
+.recipe-card, .favorite-card {
   width: 320px;
   flex-basis: auto;
   flex-grow: 0;
+}
+.recipe-card .card, .favorite-card .card {
+  height: 100%;
 }
 
 .status {
@@ -121,7 +124,7 @@ ul {
     height: 100%;
   }
   
-  .recipe-card header {
+  .recipe-card header, .favorite-card header {
     height: 180px;
   }
 }
