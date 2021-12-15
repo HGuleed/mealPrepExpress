@@ -11,6 +11,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@400;700&family=Staatliches&display=swap">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Handlee&family=Kaushan+Script&family=Open+Sans:wght@400;700&family=Staatliches&display=swap">
   <script src="https://kit.fontawesome.com/3a4289a5d2.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./assets/css/ingr-style.css" />
   <title>Ingredients</title>
@@ -40,12 +44,15 @@
           </div>
           <div class="content is-size-5">
             <p class="mx-4">
-              Meal Express, where you can conveniently build a dinner
-              plan for the work week with the items you have in your kitchen!
+              Meal Express, where you can conveniently build dinners
+              for the work week with the items you have in your kitchen!
             </p>
-            <a href="#">@portfolio1</a>
-            <a href="#">@portfolio2</a>
-            <a href="#">@portfolio3</a>
+            <p class="mx-4">
+              And a pun to brighten your evening!
+            </p>
+            <a href="https://sirteddanson.github.io/portfolio/">@MattDwyer</a>
+            <a href="https://hguleed.github.io/MyPortfolio/">@HodanGuleed</a>
+            <a href="https://emilypier.github.io/portfolio-project/">@EmilyPierson</a>
             <br>
             <time id="current-day"></time>
           </div>
@@ -81,23 +88,35 @@
   <!-- HEADER CARD ------------------------------------------------------------------------------------>
   <header class="box p-0">
     <div class="hero">
-      <div class="card hero-body container my-6 p-5">
-        <p id="ingredients-title" class="title is-2 mx-2">
-          Meal Express
-        </p>
-        <div class="content mx-2 has-text-centered">
-          <p>
-            Pick # of meals
-            <br> Select ingredients
-            <br> Search and build your plan!
-          </p>
-        </div>
-        <div class="search-btn buttons">
-          <button class="button search is-success is-size-4 py-0 is-fullwidth" title='Disabled button' disabled><i
-              class='fas fa-search pr-3'></i>Search</button>
-        </div>
-        <div class="buttons">
-          <button id="meal-btns" class="button is-success is-size-4 py-0 is-fullwidth">Pick # of Meals</button>
+      <div class="hero-body">
+        <div class="columns is-mobile is-multiline is-centered is-vcentered px-5 is-flex-wrap-wrap-reverse">
+          <div id="joke-box" class="column">
+            <div class="card joke-card container p-5">
+              <p id="joke" class="subtitle is-4 mx-2 has-text-centered">
+              </p>
+            </div>
+          </div>
+          <div id="hero-box" class="column">
+            <div class="card container ml-5 mt-6 p-5">
+              <p id="ingredients-title" class="title is-2 mx-2 has-text-centered">
+                Meal Express
+              </p>
+              <div class="content mx-2 has-text-centered">
+                <p>
+                  Pick # of meals
+                  <br> Select ingredients
+                  <br> Search and build your plan!
+                </p>
+              </div>
+              <div class="search-btn buttons">
+                <button id="searchbutton" class="button search is-success is-size-4 py-0 is-fullwidth"
+                  title='Disabled button' disabled><i class='fas fa-search pr-3'></i>Search</button>
+              </div>
+              <div class="buttons">
+                <button id="meal-btns" class="button is-success is-size-4 py-0 is-fullwidth">Pick # of Meals</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- NAVIGATION --------------------------------------------------------------------------------->
@@ -130,24 +149,40 @@
           </header>
           <div class="card-content">
             <div class="buttons is-centered">
-              <button class="ingrBtn button is-success is-outlined">Chicken</button>
               <button class="ingrBtn button is-success is-outlined">Beef</button>
+              <button class="ingrBtn button is-success is-outlined">Steak</button>
+              <button class="ingrBtn button is-success is-outlined">Beef Broth</button>
+              <button class="ingrBtn button is-success is-outlined">Ground Beef</button>
+              <button class="ingrBtn button is-success is-outlined">Roast Beef</button>
+              <button class="ingrBtn button is-success is-outlined">Beef Brisket</button>
+              <button class="ingrBtn button is-success is-outlined">Beef Chuck Roast</button>
+              <button class="ingrBtn button is-success is-outlined">Chicken</button>
+              <button class="ingrBtn button is-success is-outlined">Shredded Chicken</button>
+              <button class="ingrBtn button is-success is-outlined">Chicken Breasts</button>
+              <button class="ingrBtn button is-success is-outlined">Chicken Thighs</button>
+              <button class="ingrBtn button is-success is-outlined">Chicken Tenders</button>
+              <button class="ingrBtn button is-success is-outlined">Chicken Stock</button>
+              <button class="ingrBtn button is-success is-outlined">Chicken Broth</button>
+              <button class="ingrBtn button is-success is-outlined">Chorizo</button>
+              <button class="ingrBtn button is-success is-outlined">Cod</button>
+              <button class="ingrBtn button is-success is-outlined">Crab</button>
+              <button class="ingrBtn button is-success is-outlined">Pork</button>
+              <button class="ingrBtn button is-success is-outlined">Pork Chops</button>
+              <button class="ingrBtn button is-success is-outlined">Ground Pork</button>
               <button class="ingrBtn button is-success is-outlined">Bacon</button>
               <button class="ingrBtn button is-success is-outlined">Ham</button>
-              <button class="ingrBtn button is-success is-outlined">Pork</button>
-              <button class="ingrBtn button is-success is-outlined">Sausage</button>
-              <button class="ingrBtn button is-success is-outlined">Pepperoni</button>
               <button class="ingrBtn button is-success is-outlined">Hot Dog</button>
-              <button class="ingrBtn button is-success is-outlined">Roast Beef</button>
-              <button class="ingrBtn button is-success is-outlined">Turkey</button>
-              <button class="ingrBtn button is-success is-outlined">Chorizo</button>
               <button class="ingrBtn button is-success is-outlined">Lamb</button>
+              <button class="ingrBtn button is-success is-outlined">Pepperoni</button>
+              <button class="ingrBtn button is-success is-outlined">Sausage</button>
+              <button class="ingrBtn button is-success is-outlined">Shrimp</button>
               <button class="ingrBtn button is-success is-outlined">Salmon</button>
               <button class="ingrBtn button is-success is-outlined">Tilapia</button>
               <button class="ingrBtn button is-success is-outlined">Tuna</button>
-              <button class="ingrBtn button is-success is-outlined">Cod</button>
-              <button class="ingrBtn button is-success is-outlined">Shrimp</button>
-              <button class="ingrBtn button is-success is-outlined">Crab</button>
+              <button class="ingrBtn button is-success is-outlined">Turkey</button>
+
+
+
             </div>
           </div>
         </div>
@@ -167,10 +202,26 @@
               <button class="ingrBtn button is-success is-outlined">Bread</button>
               <button class="ingrBtn button is-success is-outlined">Whole Wheat Bread</button>
               <button class="ingrBtn button is-success is-outlined">White Bread</button>
+              <button class="ingrBtn button is-success is-outlined">Rye Bread</button>
+              <button class="ingrBtn button is-success is-outlined">Italian Bread</button>
+              <button class="ingrBtn button is-success is-outlined">Sourdough Bread</button>
+              <button class="ingrBtn button is-success is-outlined">Cornbread</button>
+              <button class="ingrBtn button is-success is-outlined">Breadcrumbs</button>
+              <button class="ingrBtn button is-success is-outlined">Panko</button>
               <button class="ingrBtn button is-success is-outlined">Pasta</button>
+              <button class="ingrBtn button is-success is-outlined">Spaghetti</button>
+              <button class="ingrBtn button is-success is-outlined">Macaroni</button>
+              <button class="ingrBtn button is-success is-outlined">Rotini Pasta</button>
+              <button class="ingrBtn button is-success is-outlined">Angel Hair Pasta</button>
+              <button class="ingrBtn button is-success is-outlined">Rotini Pasta</button>
+              <button class="ingrBtn button is-success is-outlined">Jumbo Shell Pasta</button>
+              <button class="ingrBtn button is-success is-outlined">Orzo</button>
+              <button class="ingrBtn button is-success is-outlined">Penne</button>
+              <button class="ingrBtn button is-success is-outlined">Lasagna</button>
+              <button class="ingrBtn button is-success is-outlined">Linguine</button>
               <button class="ingrBtn button is-success is-outlined">Rice</button>
               <button class="ingrBtn button is-success is-outlined">Brown Rice</button>
-              <button class="ingrBtn button is-success is-outlined">White Rice</button>
+              <button class="ingrBtn button is-success is-outlined">Jasmine Rice</button>
               <button class="ingrBtn button is-success is-outlined">Basmati Rice</button>
               <button class="ingrBtn button is-success is-outlined">Wild Rice</button>
               <button class="ingrBtn button is-success is-outlined">Quinoa</button>
@@ -191,25 +242,40 @@
           </header>
           <div class="card-content">
             <div class="buttons is-centered">
-              <button class="ingrBtn button is-success is-outlined">Onion</button>
-              <button class="ingrBtn button is-success is-outlined">Garlic</button>
-              <button class="ingrBtn button is-success is-outlined">Broccoli</button>
-              <button class="ingrBtn button is-success is-outlined">Spinach</button>
-              <button class="ingrBtn button is-success is-outlined">Tomato</button>
-              <button class="ingrBtn button is-success is-outlined">Peas</button>
-              <button class="ingrBtn button is-success is-outlined">Carrot</button>
-              <button class="ingrBtn button is-success is-outlined">Lettuce</button>
-              <button class="ingrBtn button is-success is-outlined">Cauliflower</button>
-              <button class="ingrBtn button is-success is-outlined">Corn</button>
-              <button class="ingrBtn button is-success is-outlined">Green Beans</button>
-              <button class="ingrBtn button is-success is-outlined">Pepper</button>
-              <button class="ingrBtn button is-success is-outlined">Potato</button>
-              <button class="ingrBtn button is-success is-outlined">Asparagus</button>
-              <button class="ingrBtn button is-success is-outlined">Zucchini</button>
-              <button class="ingrBtn button is-success is-outlined">Celery</button>
-              <button class="ingrBtn button is-success is-outlined">Mushroom</button>
-              <button class="ingrBtn button is-success is-outlined">Cucumber</button>
               <button class="ingrBtn button is-success is-outlined">Arugula</button>
+              <button class="ingrBtn button is-success is-outlined">Asparagus</button>
+              <button class="ingrBtn button is-success is-outlined">Broccoli</button>
+              <button class="ingrBtn button is-success is-outlined">Beets</button>
+              <button class="ingrBtn button is-success is-outlined">Carrot</button>
+              <button class="ingrBtn button is-success is-outlined">Cauliflower</button>
+              <button class="ingrBtn button is-success is-outlined">Celery</button>
+              <button class="ingrBtn button is-success is-outlined">Red Chili</button>
+              <button class="ingrBtn button is-success is-outlined">Green Chili</button>
+              <button class="ingrBtn button is-success is-outlined">Corn</button>
+              <button class="ingrBtn button is-success is-outlined">Cucumber</button>
+              <button class="ingrBtn button is-success is-outlined">Eggplant</button>
+              <button class="ingrBtn button is-success is-outlined">Garlic</button>
+              <button class="ingrBtn button is-success is-outlined">Green Beans</button>
+              <button class="ingrBtn button is-success is-outlined">Lettuce</button>
+              <button class="ingrBtn button is-success is-outlined">Mushroom</button>
+              <button class="ingrBtn button is-success is-outlined">Olives</button>
+              <button class="ingrBtn button is-success is-outlined">Sweet Onion</button>
+              <button class="ingrBtn button is-success is-outlined">White Onion</button>
+              <button class="ingrBtn button is-success is-outlined">Red Onion</button>
+              <button class="ingrBtn button is-success is-outlined">Yellow Onion</button>
+              <button class="ingrBtn button is-success is-outlined">Green Onion</button>
+              <button class="ingrBtn button is-success is-outlined">Shallot</button>
+              <button class="ingrBtn button is-success is-outlined">Bell Pepper</button>
+              <button class="ingrBtn button is-success is-outlined">Red Pepper</button>
+              <button class="ingrBtn button is-success is-outlined">Green Pepper</button>
+              <button class="ingrBtn button is-success is-outlined">Yellow Pepper</button>
+              <button class="ingrBtn button is-success is-outlined">Jalapeno Pepper</button>
+              <button class="ingrBtn button is-success is-outlined">Peas</button>
+              <button class="ingrBtn button is-success is-outlined">Potato</button>
+              <button class="ingrBtn button is-success is-outlined">Spinach</button>
+              <button class="ingrBtn button is-success is-outlined">String Beans</button>
+              <button class="ingrBtn button is-success is-outlined">Tomato</button>
+              <button class="ingrBtn button is-success is-outlined">Zucchini</button>
             </div>
           </div>
         </div>
@@ -228,22 +294,29 @@
           </header>
           <div class="card-content">
             <div class="buttons is-centered">
+              <button class="ingrBtn button is-success is-outlined">Apricot</button>
               <button class="ingrBtn button is-success is-outlined">Apple</button>
-              <button class="ingrBtn button is-success is-outlined">Avacados</button>
+              <button class="ingrBtn button is-success is-outlined">Avocados</button>
               <button class="ingrBtn button is-success is-outlined">Banana</button>
-              <button class="ingrBtn button is-success is-outlined">Orange</button>
-              <button class="ingrBtn button is-success is-outlined">Strawberry</button>
-              <button class="ingrBtn button is-success is-outlined">Lemon</button>
-              <button class="ingrBtn button is-success is-outlined">Lime</button>
               <button class="ingrBtn button is-success is-outlined">Blueberry</button>
-              <button class="ingrBtn button is-success is-outlined">Pineapple</button>
-              <button class="ingrBtn button is-success is-outlined">Raspberry</button>
-              <button class="ingrBtn button is-success is-outlined">Peach</button>
-              <button class="ingrBtn button is-success is-outlined">Raisins</button>
+              <button class="ingrBtn button is-success is-outlined">Cherry</button>
+              <button class="ingrBtn button is-success is-outlined">Coconut</button>
+              <button class="ingrBtn button is-success is-outlined">Orange</button>
               <button class="ingrBtn button is-success is-outlined">Grape</button>
               <button class="ingrBtn button is-success is-outlined">Grapefruit</button>
-              <button class="ingrBtn button is-success is-outlined">Cherry</button>
               <button class="ingrBtn button is-success is-outlined">Kiwi</button>
+              <button class="ingrBtn button is-success is-outlined">Lemon</button>
+              <button class="ingrBtn button is-success is-outlined">Lime</button>
+              <button class="ingrBtn button is-success is-outlined">Mango</button>
+              <button class="ingrBtn button is-success is-outlined">Peach</button>
+              <button class="ingrBtn button is-success is-outlined">Pear</button>
+              <button class="ingrBtn button is-success is-outlined">Pineapple</button>
+              <button class="ingrBtn button is-success is-outlined">Plum</button>
+              <button class="ingrBtn button is-success is-outlined">Pomegranate</button>
+              <button class="ingrBtn button is-success is-outlined">Strawberry</button>
+              <button class="ingrBtn button is-success is-outlined">Raisins</button>
+              <button class="ingrBtn button is-success is-outlined">Raspberry</button>
+              <button class="ingrBtn button is-success is-outlined">Watermelon</button>
             </div>
           </div>
         </div>
@@ -263,16 +336,22 @@
               <button class="ingrBtn button is-success is-outlined">Milk</button>
               <button class="ingrBtn button is-success is-outlined">Butter</button>
               <button class="ingrBtn button is-success is-outlined">Egg</button>
-              <button class="ingrBtn button is-success is-outlined">Yogurt</button>
               <button class="ingrBtn button is-success is-outlined">Cream</button>
               <button class="ingrBtn button is-success is-outlined">Sour Cream</button>
               <button class="ingrBtn button is-success is-outlined">Cream Cheese</button>
               <button class="ingrBtn button is-success is-outlined">Cheddar</button>
               <button class="ingrBtn button is-success is-outlined">Feta</button>
+              <button class="ingrBtn button is-success is-outlined">Blue Cheese</button>
               <button class="ingrBtn button is-success is-outlined">Mozzarella</button>
               <button class="ingrBtn button is-success is-outlined">Parmesan Cheese</button>
+              <button class="ingrBtn button is-success is-outlined">Goat Cheese</button>
+              <button class="ingrBtn button is-success is-outlined">Gouda Cheese</button>
+              <button class="ingrBtn button is-success is-outlined">Monterey Jack Cheese</button>
+              <button class="ingrBtn button is-success is-outlined">Pepper Jack Cheese</button>
+              <button class="ingrBtn button is-success is-outlined">Provolone Cheese</button>
               <button class="ingrBtn button is-success is-outlined">Swiss Cheese</button>
-              <button class="ingrBtn button is-success is-outlined">Blue Cheese</button>
+              <button class="ingrBtn button is-success is-outlined">Shredded Cheese</button>
+              <button class="ingrBtn button is-success is-outlined">Yogurt</button>
             </div>
           </div>
         </div>
@@ -317,7 +396,7 @@
   </section>
   <!-- RECIPE CARD SECTION, BUILT DYNAMICALLY -->
   <section class="recipe-container container">
-    <div class="recipe-columns columns">
+    <div class="recipe-columns columns is-mobile is-multiline is-centered">
       <!--  -->
     </div>
   </section>

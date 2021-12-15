@@ -1,5 +1,8 @@
 var ingredientList = []; // fills with selected ingredient
-var nmbOfMeals = 0;
+var nmbOfMeals = 0; // globally scoped integer for number of meals
+var runDisplayOnce = 0; // control for building favorites from local storage
+var recipeCardArray = []; // fills with called recipe card objects
+var storedRecipeArray = [] // fills with stored recipe card objects
 
 // Welcome page clock 
 var clock = document.getElementById("current-day");
@@ -29,8 +32,8 @@ var listToString = function (ingredientList) {
 
 // **ADD YOUR API KEY**
 // Search by ingredient call --------------------------------------------------------------
-var getFoodApi = function (ingrListStr) {                                                                                                                                                                        // --------- // 
-  foodTest = "https://api.spoonacular.com/recipes/complexSearch?query=all&addRecipeInformation=true&instructionsRequired=true&includeIngredients=" + ingrListStr + "&number=" + nmbOfMeals + "&fillIngredients=true&sort=max-used-ingredients&apiKey=74930b30746b4ed6824607ad1b62352a";                                                                                                                                                                                    // --------- // 
+var getFoodApi = function (ingrListStr) {                                                                                                                                                                       
+  foodTest = "https://api.spoonacular.com/recipes/complexSearch?query=all&addRecipeInformation=true&instructionsRequired=true&includeIngredients=" + ingrListStr + "&number=" + nmbOfMeals + "&fillIngredients=true&type=main%20course&sort=max-used-ingredients&apiKey=74930b30746b4ed6824607ad1b62352a";                                                                                                                                                                                    // --------- // 
   console.log(foodTest);
   fetch(foodTest).then(function (response) {
     if (response.ok) {
@@ -39,6 +42,7 @@ var getFoodApi = function (ingrListStr) {                                       
         console.log(data);
         parseRecipeData(data);
         dropDownMenu();
+        favoriteButton();
       });
     } else {
       alert("Error: No response from API!");
@@ -52,9 +56,9 @@ var getFoodApi = function (ingrListStr) {                                       
 // Gather necessary data from API call ----------------------------------------------------
 var parseRecipeData = function (recipe) {
   for (var i = 0; i < recipe.results.length; i++) {
-    // create recipe card object ==========================================================
-    recipeCard = {
+    var recipeCard = { // recipe card object 
       recipeTitle: "",
+      recId: "",
       recipeImage: "",
       missingIngredients: [],
       missingImages: [],
@@ -67,10 +71,13 @@ var parseRecipeData = function (recipe) {
 
     // get recipe title, main image, and missed ingredient count
     var rtitle = recipe.results[i].title;
+    var rId = recipe.results[i].id;
     var rImg = recipe.results[i].image;
+    console.log(rId)
 
     // add data to recipe card 
     recipeCard.recipeTitle = rtitle;
+    recipeCard.recId = rId;
     recipeCard.recipeImage = rImg;
 
     // get all recipe specific data for missing ingredients
@@ -102,49 +109,95 @@ var parseRecipeData = function (recipe) {
     }
 
     // get all recipe specific instructions
-    var recipeInstr = recipe.results[i].analyzedInstructions[0].steps
-    for (var h = 0; h < recipeInstr.length; h++) {
-      // get recipe steps 
-      var recStep = recipeInstr[h].step;
+    if (recipe.results[i].analyzedInstructions.length > 0) {
+      var recipeInstr = recipe.results[i].analyzedInstructions[0].steps
+      for (var h = 0; h < recipeInstr.length; h++) {
+        // get recipe steps 
+        var recStep = recipeInstr[h].step;
 
-      // add data to recipe card arry
-      recipeCard.recipeSteps.push(recStep);
+        // add data to recipe card arry
+        recipeCard.recipeSteps.push(recStep);
+      }
     }
-    buildRecipeCard(recipeCard);
-    console.log(recipeCard);
+    buildRecipeCard(i, recipeCard);
+    recipeCardArray.push(recipeCard);
+    console.log(recipeCardArray);
   }
 };
 
-// saving searched recipes to local storage 
-var saveToStorage = function (recipeCard) {
-  recipeIndexEnd = localStorage.length;
-  localStorage.setItem("Recipe Card " + recipeIndexEnd, JSON.stringify(recipeCard));
-  recipeIndexEnd++
+//------------------------------------LOCAL STORAGE-------------------------------------------------------
+// save recipe to local storage
+var saveToStorage = function (recipeId, recipeIndex) {
+  console.log(recipeId);
+  console.log(recipeIndex);
+  console.log(recipeCardArray);
+  idCounter = localStorage.length;
+  localStorage.setItem("Recipe Card " + recipeId, JSON.stringify(recipeCardArray[recipeIndex]));
+};
+
+var saveToStorage2 = function (recipeId, recipeIndex) {
+  console.log(recipeId);
+  console.log(recipeIndex);
+  console.log(storedRecipeArray);
+  idCounter = localStorage.length;
+  localStorage.setItem("Recipe Card " + recipeId, JSON.stringify(storedRecipeArray[recipeIndex]));
+};
+
+// remove recipe from local storage
+var removeFromStorage = function (recipeId) {
+  // idCounter = localStorage.length - 1;
+  console.log("recipe ID: " + recipeId);
+  console.log("remove idcounter: " + recipeId)
+  localStorage.removeItem("Recipe Card " + recipeId);
 };
 
 // loading recipes from storage
 var loadFromStorage = function () {
   for (var i = 0; i < localStorage.length; i++) {
-    var pastRecipe = JSON.parse(localStorage.getItem("Recipe Card " + i));
-    console.log(pastRecipe);
-    // build recipe cards from stored data
-    buildRecipeCard(pastRecipe);
+    var pastRecipe = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if (pastRecipe != null) {
+      storedRecipeArray.push(pastRecipe)
+      console.log(pastRecipe);
+    }
   }
+  console.log(storedRecipeArray);
+};
+
+// build recipe cards from displays 
+var displayFavorites = function () {
+  for (var i = 0; i < storedRecipeArray.length; i++) {
+    // build recipe cards from stored data
+    buildRecipeCard(i, storedRecipeArray[i]);
+  }
+  // give button functionality 
+  dropDownMenu();
+  // favoriteButton();
+
+  runDisplayOnce++
+  // change to favorited icon
+  $('.fstar').removeClass('far fa-star').addClass('fas fa-star');
+  $('.recipe-card').removeClass('recipe-card').addClass('favorite-card');
+  $('.favorite').removeClass('favorite').addClass('stored-favorite');
 };
 
 // =========================================================== RECIPE CARD CREATION ================================================================
-var buildRecipeCard = function (recipe) {
-  // take data from storage and build history page elements
+var buildRecipeCard = function (i, recipeCard) {
+
+  // recipe card favorite button
+  var fButtonContainer = $('<p>').addClass('buttons fav-cont');
+  var fButton = $('<button>').addClass('button favorite is-large is-white').attr('id', recipeCard.recId).attr('index', i);
+  var fIconSpan = $('<span>').addClass('icon is-large');
+  var fIcon = $('<i>').addClass('fstar far fa-star');
 
   // recipe card header(r)
   var rColumns = $('.recipe-columns');
   var rColumn = $('<div>').addClass('recipe-card column');
   var rCard = $('<div>').addClass('card');
   var rCardHead = $('<header>').addClass('card-header mb-0 title is-4 color-3');
-  var rTitle = $('<p>').addClass('card-header-title title-is-4').text(recipe.recipeTitle);
+  var rTitle = $('<p>').addClass('card-header-title title-is-4 pt-0 pb-5').text(recipeCard.recipeTitle);
   var rImageDiv = $('<div>').addClass('card-image');
   var rFigure = $('<figure>').addClass('image is 4by3');
-  var rMainImg = $('<img>').attr('src', recipe.recipeImage).attr('alt', recipe.recipeTitle);
+  var rMainImg = $('<img>').attr('src', recipeCard.recipeImage).attr('alt', recipeCard.recipeTitle);
 
   // recipe card ingredients drop down element(ib)
   var ibContainer = $('<div>').addClass('dropdown');
@@ -160,11 +213,11 @@ var buildRecipeCard = function (recipe) {
   var iCardContent = $('<div>').addClass('card-content pt-0');
   var iMedia = $('<div>').addClass('ingredient-img media my-0 pt-2');
   var iMediaLeft = $('<div>').addClass('media-left');
-  var iFigure = $('<figure>').addClass('image level is-32x32');
+  var iFigure = $('<figure>').addClass('image level is-48x48');
   var iImage = $('<img>').addClass('is-rounded level-item');
   var iMediaContent = $('<div>').addClass('media-content');
-  var iTitle = $('<p>').addClass('title is-6');
-  var iStatus = $('<p>').addClass('status subtitle is-7 px-2');
+  var iTitle = $('<p>').addClass('title is-5');
+  var iStatus = $('<p>');
 
   // recipe card amounts(a)
   var aContainer = $('<div>').addClass('amounts-container card-content py-0');
@@ -183,6 +236,12 @@ var buildRecipeCard = function (recipe) {
   var ddStep = $('<p>').addClass('mb-4');
 
   // build recipe card ---------------------------------------------
+  // recipe card favorite button
+  fIconSpan.append(fIcon);
+  fButton.append(fIconSpan);
+  fButtonContainer.append(fButton);
+  rCard.append(fButtonContainer);
+
   // recipe card header
   rCardHead.append(rTitle);
   // add header to recipe card
@@ -204,13 +263,13 @@ var buildRecipeCard = function (recipe) {
   ibMenu.append(ibInstructions);
 
   // loop through missing ingredients and populate card
-  for (var i = 0; i < recipe.missingIngredients.length; i++) {
-    console.log(recipe.missingIngredients.length)
-    iFigure.append(iImage.attr('src', recipe.missingImages[i]));
-    console.log(recipe.missingImages[i])
+  for (var i = 0; i < recipeCard.missingIngredients.length; i++) {
+    console.log(recipeCard.missingIngredients.length)
+    iFigure.append(iImage.attr('src', recipeCard.missingImages[i]));
+    console.log(recipeCard.missingImages[i])
     iMediaLeft.append(iFigure);
     iMedia.append(iMediaLeft);
-    iMediaContent.append(iTitle.text(recipe.missingIngredients[i]), iStatus.text('missing').addClass('status2 has-background-grey-lighter'));
+    iMediaContent.append(iTitle.text(recipeCard.missingIngredients[i]), iStatus.text('missing').addClass('status2 subtitle is-7 px-2 has-background-grey-lighter'));
     iMedia.append(iMediaContent);
     // add missing ingredients to ingredient card content
     console.log(iTitle.text());
@@ -218,12 +277,12 @@ var buildRecipeCard = function (recipe) {
   }
 
   // loop through used ingredients and populate card
-  for (var i = 0; i < recipe.usedIngredients.length; i++) {
-    iFigure.append(iImage.attr('src', recipe.usedImages[i]).attr('alt', recipe.usedIngredients[i]));
+  for (var i = 0; i < recipeCard.usedIngredients.length; i++) {
+    iFigure.append(iImage.attr('src', recipeCard.usedImages[i]).attr('alt', recipeCard.usedIngredients[i]));
     iMediaLeft.append(iFigure);
     iMedia.append(iMediaLeft);
 
-    iMediaContent.append(iTitle.text(recipe.usedIngredients[i]), iStatus.text('in kitchen').addClass('status has-text-white has-background-success'));
+    iMediaContent.append(iTitle.text(recipeCard.usedIngredients[i]), iStatus.text('in kitchen').removeClass('status2 subtitle is-7 px-2 has-background-grey-lighter').addClass('status subtitle is-7 px-2 has-text-white has-background-success'));
     iMedia.append(iMediaContent);
 
     // add used ingredients to ingredient card content
@@ -241,11 +300,11 @@ var buildRecipeCard = function (recipe) {
   rCard.append(ibContainer);
 
   // add missing and used ingredient amounts
-  for (var i = 0; i < recipe.missingAmounts.length; i++) {
-    aList.append(aAmount.text(recipe.missingAmounts[i]).clone())
+  for (var i = 0; i < recipeCard.missingAmounts.length; i++) {
+    aList.append(aAmount.text(recipeCard.missingAmounts[i]).clone())
   }
-  for (var i = 0; i < recipe.usedAmounts.length; i++) {
-    aList.append(aAmount.text(recipe.usedAmounts[i]).clone())
+  for (var i = 0; i < recipeCard.usedAmounts.length; i++) {
+    aList.append(aAmount.text(recipeCard.usedAmounts[i]).clone())
   }
   // add amount container to recipe card
   aContainer.append(aList);
@@ -260,9 +319,9 @@ var buildRecipeCard = function (recipe) {
   ddContainer.append(ddTrigger);
 
   // add steps to instructions 
-  for (var i = 0; i < recipe.recipeSteps.length; i++) {
-    ddInstructions.append(ddStep.text(recipe.recipeSteps[i]).clone())
-    console.log(recipe.recipeSteps[i])
+  for (var i = 0; i < recipeCard.recipeSteps.length; i++) {
+    ddInstructions.append(ddStep.text(recipeCard.recipeSteps[i]).clone())
+    console.log(recipeCard.recipeSteps[i])
   }
 
   // add instructions to drop down
@@ -280,30 +339,12 @@ var buildRecipeCard = function (recipe) {
 };
 //-------------------------------------------------------------------------------------------------------------------------------
 
-// drop down menu functionality -----------------------
-var dropDownMenu = function () {
-  $('.rDropDown').on('click', function () {
-    // get class of dropdown div when clicking button
-    var dropDownState = $(this).parent().parent().attr('class');
-    console.log("Drop down clicked");
-    console.log(dropDownState);
-    // trigger the drop down if it is not active, otherwise deactivate  
-    if (dropDownState == "dropdown") {
-      $(this).parent().parent().addClass('is-active')
-      $(this).removeClass('is-outlined');
-    } else {
-      $(this).parent().parent().removeClass('is-active')
-      $(this).addClass('is-outlined');
-    }
-  });
-};
-
 // ================================ BUTTON LISTENERS ============================================================================
 // ingredient btn listner ------------------------------------------------------------------
 $('.ingrBtn').on('click', function () {
   var btnState = $(this).attr('class');
   // clicked btn text, minus spaces, to lower case. 
-  var ingredient = $(this).text().replaceAll(" ", "").toLowerCase();
+  var ingredient = $(this).text().replaceAll(" ", "%20").toLowerCase();
 
   // when button is first clicked, add ingr, turn solid clr
   if (btnState == "ingrBtn button is-success is-outlined") {
@@ -354,6 +395,7 @@ $('.search-btn').on('click', function () {
   console.log("search clicked!");
   console.log(ingredientList);
   console.log("# of meals: " + nmbOfMeals);
+  $('.recipe-card').remove();
   listToString(ingredientList);
   $('#current-tab').trigger('click')
 });
@@ -377,6 +419,7 @@ $('#ingredient-tab').on('click', function () {
   $('#current-tab').removeClass("is-active");
   $('#favorite-tab').removeClass('is-active');
   $('.recipe-card').addClass('hide');
+  $('.favorite-card').addClass('hide');
 });
 
 // CURRENT button brings up current meals screen ------------------------------------------
@@ -386,6 +429,7 @@ $('#current-tab').on('click', function () {
   $('#current-tab').addClass('is-active');
   $('#favorite-tab').removeClass('is-active');
   $('.recipe-card').removeClass('hide');
+  $('.favorite-card').addClass('hide');
 });
 
 // FAVORITE button brings up current meals screen ------------------------------------------
@@ -395,6 +439,73 @@ $('#favorite-tab').on('click', function () {
   $('#ingredients-container').addClass('hide');
   $('#favorite-tab').addClass('is-active');
   $('.recipe-card').addClass('hide');
-  // loadFromStorage();
+  $('.favorite-card').removeClass('hide');
+
+  if (runDisplayOnce < 1) {
+    displayFavorites();
+    favoriteButton2();
+  }
 });
-// loadFromStorage();
+
+// favorite button functionality ----------------------
+var favoriteButton = function () {
+  $('.favorite').on('click', function () {
+    var favoriteState = $(this).children().children().attr('class');
+    var recipeId = $(this).attr('id');
+    var recipeIndex = $(this).attr('index');
+    console.log(favoriteState);
+    console.log(recipeId);
+    console.log("Favorite button clicked!");
+    if (favoriteState == "fstar far fa-star") {
+      $(this).children().children().removeClass('far fa-star').addClass('fas fa-star');
+      console.log("Added to favorites!");
+      saveToStorage(recipeId, recipeIndex);
+    } else {
+      $(this).children().children().removeClass('fas fa-star').addClass('far fa-star');
+      console.log("Removed from favorites!");
+      removeFromStorage(recipeId, recipeIndex)
+    }
+  })
+};
+
+// favorite button functionality ----------------------
+var favoriteButton2 = function () {
+  $('.stored-favorite').on('click', function () {
+    var favoriteState = $(this).children().children().attr('class');
+    var recipeId = $(this).attr('id');
+    var recipeIndex = $(this).attr('index');
+    console.log(favoriteState);
+    console.log(recipeId);
+    console.log("Stored Favorite button clicked!");
+    if (favoriteState == "fstar far fa-star") {
+      $(this).children().children().removeClass('far fa-star').addClass('fas fa-star');
+      console.log("Added to favorites!");
+      saveToStorage2(recipeId, recipeIndex);
+    } else {
+      $(this).children().children().removeClass('fas fa-star').addClass('far fa-star');
+      console.log("Removed from favorites!");
+      removeFromStorage(recipeId, recipeIndex)
+    }
+  })
+};
+
+// drop down menu functionality -----------------------
+var dropDownMenu = function () {
+  $('.rDropDown').on('click', function () {
+    // get class of dropdown div when clicking button
+    var dropDownState = $(this).parent().parent().attr('class');
+    console.log("Drop down clicked");
+    // trigger the drop down if it is not active, otherwise deactivate  
+    if (dropDownState == "dropdown") {
+      $(this).parent().parent().addClass('is-active')
+      $(this).removeClass('is-outlined');
+      console.log("Drop down is active!");
+    } else {
+      $(this).parent().parent().removeClass('is-active')
+      $(this).addClass('is-outlined');
+      console.log("Drop down deactivated!");
+    }
+  });
+};
+
+loadFromStorage();
