@@ -32,8 +32,8 @@ var listToString = function (ingredientList) {
 
 // **ADD YOUR API KEY**
 // Search by ingredient call --------------------------------------------------------------
-var getFoodApi = function (ingrListStr) {                                                                                                                                                                        // --------- // 
-  foodTest = "https://api.spoonacular.com/recipes/complexSearch?query=all&addRecipeInformation=true&instructionsRequired=true&includeIngredients=" + ingrListStr + "&number=" + nmbOfMeals + "&fillIngredients=true&type=main%20course&sort=min-missing-ingredients&apiKey=d2c8f16302ed4e7e87a7101f1bf935e8";                                                                                                                                                                                    // --------- // 
+var getFoodApi = function (ingrListStr) {                                                                                                                                                                       
+  foodTest = "https://api.spoonacular.com/recipes/complexSearch?query=all&addRecipeInformation=true&instructionsRequired=true&includeIngredients=" + ingrListStr + "&number=" + nmbOfMeals + "&fillIngredients=true&type=main%20course&sort=min-missing-ingredients&apiKey=74930b30746b4ed6824607ad1b62352a";                                                                                                                                                                                    // --------- // 
   console.log(foodTest);
   fetch(foodTest).then(function (response) {
     if (response.ok) {
