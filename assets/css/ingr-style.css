@@ -18,6 +18,34 @@ body {
   background-repeat: no-repeat;
 }
 
+.hero-body {
+  padding: 0;
+}
+
+.joke-card, .joke-card p {
+  padding: 0!important;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--secondary-color);
+  min-width: 300px;
+  font-family: 'Handlee', cursive;
+}
+
+#joke-box:hover {
+  cursor: pointer;
+}
+
+#joke {
+  margin: 0;
+}
+
+#hero-box {
+  max-width: 340px;
+}
+
+.hero-foot {
+  margin-top: 1.5rem;
+}
+
 .tabs a {
   color: var(--secondary-color);
 }
@@ -56,6 +84,7 @@ body {
   flex-basis: auto;
   flex-grow: 0;
 }
+
 .recipe-card .card, .favorite-card .card {
   height: 100%;
 }
@@ -93,6 +122,7 @@ ul {
   display: none;
 }
 
+
 /* WELCOME MODAL STYLING ---------------------------- */
 .media-content span {
   font-family: 'Kaushan Script', cursive;
@@ -109,15 +139,10 @@ ul {
 
 /* RESPONSIVENESS STYLING START --------------------- */
 @media screen and (min-width: 1100px) {
-
   .hero {
     background-image: url("../images/banner-1.png");
     background-position: bottom left;
     background-repeat: no-repeat;
-  }
-
-  .hero-body {
-    margin-left: 55%;
   }
 
   section .ingredient-card {
@@ -126,5 +151,29 @@ ul {
   
   .recipe-card header, .favorite-card header {
     height: 180px;
+  }
+
+  #hero-box {
+    margin-right: 15%;
+  }
+
+  #joke {
+    margin-top: 65px;
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+
+  #hero-box {
+    margin-right: 23%;
+  }
+
+  #joke-box {
+    margin-left: 20%;
+  }
+
+  #joke {
+    font-size: 2.2rem;
   }
 }

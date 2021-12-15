@@ -11,6 +11,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@400;700&family=Staatliches&display=swap">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Handlee&family=Kaushan+Script&family=Open+Sans:wght@400;700&family=Staatliches&display=swap">
   <script src="https://kit.fontawesome.com/3a4289a5d2.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./assets/css/ingr-style.css" />
   <title>Ingredients</title>
@@ -43,9 +47,9 @@
               Meal Express, where you can conveniently build a dinner
               plan for the work week with the items you have in your kitchen!
             </p>
-            <a href="#">@portfolio1</a>
-            <a href="#">@portfolio2</a>
-            <a href="#">@portfolio3</a>
+            <a href="https://sirteddanson.github.io/portfolio/">@MattDwyer</a>
+            <a href="https://hguleed.github.io/MyPortfolio/">@HodanGuleed</a>
+            <a href="https://emilypier.github.io/portfolio-project/">@EmilyPierson</a>
             <br>
             <time id="current-day"></time>
           </div>
@@ -81,23 +85,35 @@
   <!-- HEADER CARD ------------------------------------------------------------------------------------>
   <header class="box p-0">
     <div class="hero">
-      <div class="card hero-body container my-6 p-5">
-        <p id="ingredients-title" class="title is-2 mx-2">
-          Meal Express
-        </p>
-        <div class="content mx-2 has-text-centered">
-          <p>
-            Pick # of meals
-            <br> Select ingredients
-            <br> Search and build your plan!
-          </p>
-        </div>
-        <div class="search-btn buttons">
-          <button class="button search is-success is-size-4 py-0 is-fullwidth" title='Disabled button' disabled><i
-              class='fas fa-search pr-3'></i>Search</button>
-        </div>
-        <div class="buttons">
-          <button id="meal-btns" class="button is-success is-size-4 py-0 is-fullwidth">Pick # of Meals</button>
+      <div class="hero-body">
+        <div class="columns is-mobile is-multiline is-centered is-vcentered px-5 is-flex-wrap-wrap-reverse">
+          <div id="joke-box" class="column">
+            <div class="card joke-card container p-5">
+              <p id="joke" class="subtitle is-4 mx-2 has-text-centered">
+              </p>
+            </div>
+          </div>
+          <div id="hero-box" class="column">
+            <div class="card container ml-5 mt-6 p-5">
+              <p id="ingredients-title" class="title is-2 mx-2 has-text-centered">
+                Meal Express
+              </p>
+              <div class="content mx-2 has-text-centered">
+                <p>
+                  Pick # of meals
+                  <br> Select ingredients
+                  <br> Search and build your plan!
+                </p>
+              </div>
+              <div class="search-btn buttons">
+                <button id="searchbutton" class="button search is-success is-size-4 py-0 is-fullwidth" title='Disabled button' disabled><i
+                    class='fas fa-search pr-3'></i>Search</button>
+              </div>
+              <div class="buttons">
+                <button id="meal-btns" class="button is-success is-size-4 py-0 is-fullwidth">Pick # of Meals</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- NAVIGATION --------------------------------------------------------------------------------->
