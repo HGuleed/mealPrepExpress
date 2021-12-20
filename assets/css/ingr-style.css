@@ -58,8 +58,8 @@ body {
 .tabs li.is-active a {
   color: var(--primary-color)
 }
-/* CURRENT TAB MSG STYLING */
-.current-msg .subtitle {
+/* CURRENT TAB/FAVORITE TAB MSG STYLING */
+.current-msg .subtitle, .favorite-msg .subtitle {
   font-family: 'Kaushan Script', cursive;
 }
 

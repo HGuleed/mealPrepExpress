@@ -145,6 +145,10 @@ var removeFromStorage = function (recipeId) {
 var loadFromStorage = function () {
   // reset array
   storedRecipeArray = [];
+  // display msg if no favorites added
+  if (localStorage.length > 0) {
+    $('.favorite-msg').removeClass('hide').addClass('hide')
+  }
   for (var i = 0; i < localStorage.length; i++) {
     var pastRecipe = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if (pastRecipe != null) {
@@ -410,6 +414,7 @@ $('#ingredient-tab').on('click', function () {
   $('#ingredient-tab').addClass('is-active');
   $('#current-tab').removeClass("is-active");
   $('#favorite-tab').removeClass('is-active');
+  $('.favorite-msg').addClass('hide');
   $('.current-msg').addClass('hide');
   $('.recipe-card').addClass('hide');
   $('.favorite-card').remove();
@@ -423,22 +428,28 @@ $('#current-tab').on('click', function () {
   $('#current-tab').addClass('is-active');
   $('#favorite-tab').removeClass('is-active');
   $('.current-msg').removeClass('hide');
+  $('.favorite-msg').addClass('hide');
   $('.recipe-card').removeClass('hide');
   $('.favorite-card').remove();
 });
 
 // FAVORITE tab brings up current meals screen ------------------------------------------
 $('#favorite-tab').on('click', function () {
+  $('.favorite-card').remove();
   $('#ingredient-tab').removeClass('is-active');
   $('#current-tab').removeClass("is-active");
   $('#ingredients-container').addClass('hide');
   $('#favorite-tab').addClass('is-active');
+  $('.favorite-msg').removeClass('hide');
   $('.current-msg').addClass('hide');
   $('.recipe-card').addClass('hide');
   $('.current-welcome').remove();
   favoriteControl++;
   loadFromStorage();
   displayFavorites();
+  if (localStorage.length < 1) {
+    $('.favorite-msg').removeClass('hide')
+  }
 });
 
 // ------------------------------------------- DYNAMIC BUTTON LISTENERS ---------------------------------------------------
