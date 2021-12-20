@@ -134,6 +134,17 @@
       </div>
     </div>
   </header>
+  <!-- CURRENT TAB MESSAGE WHEN NO RECIPES SEARCHED -->
+  <div class="card current-msg hide">
+    <div class="card-content has-text-centered">
+      <p class="title err-msg">
+        Select ingredients and find a recipe!
+      </p>
+      <p class="subtitle">
+        - Meal Express
+      </p>
+    </div>
+  </div>
   <!-- INGREDIENTS SELECTION ------------------------------------------------------------------------->
   <section id="ingredients-container" class="container">
     <div class="columns">
@@ -180,9 +191,6 @@
               <button class="ingrBtn button is-success is-outlined">Tilapia</button>
               <button class="ingrBtn button is-success is-outlined">Tuna</button>
               <button class="ingrBtn button is-success is-outlined">Turkey</button>
-
-
-
             </div>
           </div>
         </div>
@@ -358,7 +366,6 @@
       </div>
       <div class="column">
         <div class="card ingredient-card">
-
           <header class="card-header ml-3 mb-0 title is-4 color-3">
             <figure class="image is-64x64 m-2">
               <img class="is-rounded" src="./assets/images/condiments-img.png">
@@ -397,7 +404,7 @@
   <!-- RECIPE CARD SECTION, BUILT DYNAMICALLY -->
   <section class="recipe-container container">
     <div class="recipe-columns columns is-mobile is-multiline is-centered">
-      <!--  -->
+      <!-- ALL RECIPE CARDS APPEND THIS CONTAINER -->
     </div>
   </section>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

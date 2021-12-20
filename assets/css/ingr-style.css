@@ -58,6 +58,10 @@ body {
 .tabs li.is-active a {
   color: var(--primary-color)
 }
+/* CURRENT TAB MSG STYLING */
+.current-msg .subtitle {
+  font-family: 'Kaushan Script', cursive;
+}
 
 /* INGREDIENTS PAGE STYLING ------------------------- */
 #ingredients-title {
@@ -94,12 +98,12 @@ body {
 }
 
 .status {
-  width: 69px;
+  width: 70px;
   border-radius: 5px;
 }
 
 .status2 {
-  width: 57px;
+  width: 60px;
   border-radius: 5px;
 }
 
@@ -141,6 +145,7 @@ ul {
 }
 
 /* RESPONSIVENESS STYLING START --------------------- */
+/* LARGE SCREEENS */
 @media screen and (min-width: 1100px) {
   .hero {
     background-image: url("../images/banner-1.png");
@@ -165,7 +170,7 @@ ul {
     font-size: 1.7rem;
   }
 }
-
+/* LARGEST SCREENS */
 @media screen and (min-width: 1700px) {
 
   #hero-box {
