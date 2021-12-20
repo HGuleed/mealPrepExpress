@@ -8,15 +8,15 @@ GIVEN I want to find recipes in order to meal prep
 
 WHEN I enter the ingredients I have on hand and click "search" 
 
-THEN I receive a list of recipes that use ingredients I specified.
-
-WHEN I select specifications on what type of meal I want 
-
-THEN I see recipes for that specific type of meal only
+THEN I receive a list of recipes that use the ingredients I specified.
 
 WHEN I close the browser and reopen the app later
 
-THEN I can see my previous recipes
+THEN I can see my previouly favorited recipes
+
+WHEN I click the joke at the top of the page
+
+THEN I receive a new random joke
 
 ## Image
 ![Image of Meal Prep Express.](./assets/images/meal-express-screenshot.png) 
